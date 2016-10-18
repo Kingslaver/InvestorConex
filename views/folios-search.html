@@ -1,0 +1,212 @@
+   <div class="contentarea" id="rightColumn">
+        <div class="pageTitle">
+            <h1>Search Folio</h1>
+        </div>
+        <div class="filterBar">
+            <div class="filterSearch" ng-click="filterSearch()">
+                <i class="fa fa-filter"></i>
+            </div>
+            <div class="filterGroup sortGroup">
+                <label>Sort by</label>
+                <select class="form-control">
+                    <option>All</option>
+                </select>
+            </div>
+
+        </div>
+        <div class="mainWrapper folioSearchWrapper">
+           
+                <div class="filterSearchWrapper"  ng-show="filterSearchWrapper">
+					
+                       <div class="closefilterSearch" ng-click='closeFilerSearch()'><i class="fa fa-times"></i></div>
+                       
+                       
+                       <div class="contentSpacing">
+                            <h6>User Name</h6>
+                            <angucomplete id="ex1"
+							  placeholder="Search username"
+							  pause="100"
+							  selectedobject="foliodata.userName"
+							  searchfields="userName"
+							  titlefield="userName"
+							  url="http://investorconex.com/api/users/find/"
+							  datafield="userlist"
+							  minlength="1"
+							  inputclass="form-control form-control-small"/>
+                        </div>
+                       
+						  
+						  
+                        <div class="contentSpacing">
+                            <h6>Folio Name</h6>
+                            <input ng-model="foliodata.folioname" type="text" class="form-control" />
+                        </div>
+                        
+                        <button type="submit" ng-click="searchFolio()" class="btn btn-save">Search</button>
+                        
+                        
+                        <ul class="filterSearchAccortion">
+                           <li>
+                                <div class="filerAccordionHeader"><b>Type Of Folios</b><i class="fa fa-angle-down"></i></div>
+                                
+                                <ul>
+									<li><li ng-repeat="folioType in folioTypes">
+									<input type="checkbox" ng-change="searchFolio()" ng-model="folioType.checked"> {{folioType.Value}}
+									</li>
+                                </ul>
+                                
+                            </li>
+                            
+                             <li>
+                                <div class="filerAccordionHeader">
+                                    <b>Investment Timeline</b>
+                                <i class="fa fa-angle-down"></i>
+                                </div>
+                                <ul>
+									<li><li ng-repeat="investmentTimeLine in InvestmentTimelineOptions">
+									<input type="checkbox" ng-change="searchFolio()" ng-model="investmentTimeLine.checked"> {{investmentTimeLine.Value}}
+									</li>
+                                </ul>
+                                
+                            </li>
+                            <li>
+                                <div class="filerAccordionHeader">
+                                    <b>Monthly return greater than</b>
+                                    <i class="fa fa-angle-down"></i>
+                                </div>
+                                <ul>
+                                    <li>
+                                        <div class="sliderrangeWrapper">
+                                            <p>
+                                                <!--<input type="text" id="range_monthlyReturn" readonly style="border: 0; color: #f6931f; font-weight: bold;">-->
+                                            </p>
+
+                                            <input type="text" class="pull-left sliderValue" id="range_monthlyReturn_start"/>
+                                            <input type="text" class="pull-right sliderValue" id="range_monthlyReturn_end"/>
+
+                                            <div id="slider_mothlyReturn"></div>
+                                            
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <div class="filerAccordionHeader">
+                                    <b>Return from inception greater than</b>
+                                    <i class="fa fa-angle-down"></i>
+                                </div>
+                                <ul>
+                                    <li>
+                                        <div class="sliderrangeWrapper">
+                                            <!--<p>
+                                                <input type="text" id="range_inception" readonly style="border: 0; color: #f6931f; font-weight: bold;">
+                                            </p>-->
+                                            <input type="text" class="pull-left sliderValue" id="range_inception_start"/>
+                                            <input type="text" class="pull-right sliderValue" id="range_inception_end"/>
+                                            <div id="slider_inception"></div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <div class="filerAccordionHeader">
+                                    <b>Folio Creation Range</b>
+                                    <i class="fa fa-angle-down"></i>
+                                </div>
+                                <ul>
+									<li><li ng-repeat="folioCreationRange in folioCreationRangeOptions">
+									<input type="checkbox" ng-change="searchFolio()" ng-model="folioCreationRange.checked"> {{folioCreationRange.Value}}
+									</li>
+                                </ul>
+                                
+                            </li>
+                        </ul>
+                        
+                        
+							
+						
+
+                    </div>
+               
+              
+            
+            
+            <div class="myFolioListWrapper">
+				<ul class="myFolioList">
+					<li  ng-repeat="folio in searchResultFolios">
+						<a ng-href="#/folios/{{folio.folioId}}">
+							
+							<div class="folioImageMask"><img width="200" height="140" ng-src={{folio.image}}></div>
+                            <div class="folioDetails">
+                                <div class="pull-left">
+                                    <h3 class="folioTitle">{{folio.name}}</h3>
+                                    <span class="folioCreatedDate">{{folio.createdDate | date:'yyyy-MM-dd'}} </span><!--Created Date:-->
+                                    <h3 class="folioUserName"><a ng-href="#/users/{{folio.user.userName}}">{{folio.user.userName}}</a></h3>
+                                    <h1 class="folioPercentage"><i class="fa fa-arrow-up"></i>40%</h1>
+                                </div>
+                                
+                            </div>
+                          </a>
+                        
+                     </li>
+                     
+                  </ul>
+            </div>
+            
+        
+       
+    </div>
+    
+    </div>
+    </div>
+
+
+
+
+
+    <!--<script src="content/plugins/dataTable/jquery.dataTables.min.js"></script>-->
+    <!--<script src="js/scripts.js"></script>-->
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('.filerAccordionHeader').click(function () {
+               $(this).next().slideToggle();             
+            });
+
+            $("#slider_mothlyReturn").slider({
+                range: true,
+                min: 0,
+                max: 100,
+                values: [0, 100],
+                slide: function (event, ui) {
+                   // $("#range_monthlyReturn").val(ui.values[0] + "% - " + ui.values[1] + "%");
+
+                   $("#range_monthlyReturn_start").val(ui.values[0] + "%");
+                   $("#range_monthlyReturn_end").val(ui.values[1] + "%");
+                   
+                }
+            });
+           //$("#range_monthlyReturn").val($("#slider_mothlyReturn").slider("values", 0) + "% - " + $("#slider_mothlyReturn").slider("values", 1) + "%");
+           $("#range_monthlyReturn_start").val($("#slider_mothlyReturn").slider("values", 0) + "%");
+           $("#range_monthlyReturn_end").val($("#slider_mothlyReturn").slider("values", 1) + "%");
+ 
+
+            $("#slider_inception").slider({
+                range: true,
+                min: 0,
+                max: 100,
+                values: [0, 100],
+                slide: function (event, ui) {
+                    //$("#range_inception").val(ui.values[0] + "% - " + ui.values[1] + "%");
+
+                    $("#range_inception_start").val(ui.values[0] + "%");
+                    $("#range_inception_end").val(ui.values[1] + "%");
+                }
+            });
+           // $("#range_inception").val($("#slider_inception").slider("values", 0) + "% - " + $("#slider_inception").slider("values", 1) + "%");
+
+           $("#range_inception_start").val($("#slider_inception").slider("values", 0) + "%");
+           $("#range_inception_end").val($("#slider_inception").slider("values", 1) + "%");
+
+        });
+    </script>

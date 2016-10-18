@@ -1,0 +1,61 @@
+<div class="contentarea" id="rightColumn">
+    <div class="pageTitle">
+        <h1>Edit My Circle</h1>
+    </div>
+
+    <div class="mainWrapper editCircle">
+		 <form class="tabbable" name="folioForm" role="form" novalidate>
+        
+		
+            <div class="row">
+				<label class="col-sm-2">MyCircle Name</label>
+				<div class="col-sm-6">
+					<input type="text" name="folioname" class="form-control" ng-model="mycircle.name" ng-disabled="{{mode=='Detail'}}" required  />
+				   
+				</div>
+            </div>
+            
+            <div id="users" class="row stocksWrapper">
+				<label class="col-sm-2">Users</label>
+				<div class="col-sm-6">
+					<input type="text" class="form-control" ng-model="query">
+					<button type="submit" ng-click="addSelectedUser()" class="btn btn-save" style="position: absolute; top: 0px; right: 16px;"><i class="fa fa-plus"></i></button>
+					<select ng-model="selectedUser" size="10" ng-options="user.userId as user.firstName for user in users | filter:query"></select>
+				</div>     
+				
+            </div>
+           
+                            
+            <div class="row">
+				<label class="col-sm-2">Users In Circle</label>
+				<div id="selectedstocks" class="col-sm-6">
+					<table class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th width="80%">Name</th>
+								<th>Remove</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="user in mycircle.userList">
+								<td width="80%">{{user.user.firstName}}</td>
+								<td align="center">
+									<button ng-click="removeUser(user)" class="removeSelected">
+										<i class="fa fa-times"></i>
+									</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			
+			<div class="col-md-12">
+				<div class="button-group"> <a class="btn btn-primary" ng-click="saveCircle()">Save</a>
+				</div>
+			</div>
+        </div>
+    </div>
+    </form>
+</div>
+

@@ -1,0 +1,43 @@
+<div class="panelHeader">My Folios</div>
+<div class="panelBody">
+
+    <div class="myFolioListWrapper">
+        <ul class="myFolioList">
+            <li ng-repeat="folio in myfolios | limitTo: 6">
+                <a ng-href="#/folios/{{folio.folioId}}">
+
+                    <div class="folioImageMask"><img width="200" height="100" ng-src={{folio.image}}></div>
+                </a>
+                <div class="folioDetails">
+                    <a ng-href="#/folios/{{folio.folioId}}">
+                        <div>
+
+                            <h3 class="folioTitle">{{folio.name}}</h3>
+
+
+                            <h1 class="folioPercentage">{{folio.returns}}%</h1>
+                            <h3 class="folioCreatedDate">{{folio.createdDate | date:'yyyy-MM-dd'}} </h3>
+                        </div>
+                    </a>
+                    <div class="folioUserName"><a ng-href="#/users/{{folio.user.userName}}">{{folio.user.userName}}</a></div>
+                </div>
+
+            </li>
+
+        </ul>
+    </div>
+    <div ng-show="myfolios.length > 5">
+        <div class="row buttonWrapper"><a class="btn btn-primary btn-sm pull-right" ui-sref="folios">More</a></div>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+

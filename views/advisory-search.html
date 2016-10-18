@@ -1,0 +1,120 @@
+   <div class="contentarea" id="rightColumn">
+        <div class="pageTitle">
+            <h1>Advisor Search</h1>
+        </div>
+        <div class="filterBar">
+            <div class="filterSearch">
+                <i class="fa fa-filter"></i>
+            </div>
+            <div class="filterGroup sortGroup">
+                <label>Sort by</label>
+                <select class="form-control">
+                    <option>All</option>
+                </select>
+            </div>
+
+        </div>
+        <div class="mainWrapper folioSearchWrapper">
+            <div class="col-md-12" style="padding:0;">
+                <div class="col-md-2 filterSearchWrapper" style="padding:0;">
+                    <div>
+                <li>
+
+                       <div class="closefilterSearch" ng-click='closeFilerSearch()'><i class="fa fa-times"></i></div>
+                        <div class="contentSpacing">
+                            <h6>Name</h6>
+                            <input ng-model="advisorydata.name" type="text" class="form-control" />
+                        </div>
+                        <ul class="filterSearchAccortion">
+                           <li>
+								<div class="filerAccordionHeader">
+									<b>Location</b>
+									<i class="fa fa-angle-down"></i>
+								</div>
+                                <ul>
+									<li><li ng-repeat="location in locationOptions">
+									<input type="checkbox" ng-model="location.checked"> {{location.locationName}}
+									</li>
+                                </ul>
+                                
+                            </li>
+                            
+                             <li>
+                                <div class="filerAccordionHeader">
+									<b>Security Type</b>
+									<i class="fa fa-angle-down"></i>
+								</div>
+                                <ul>
+									<li><li ng-repeat="security in securityTypeOptions">
+									<input type="checkbox" ng-model="security.checked"> {{security.securityTypeName}}
+									</li>
+                                </ul>
+                                
+                            </li>
+                            
+                            <li>
+								<div class="filerAccordionHeader">
+									<b>Minimum Investment</b>
+									<i class="fa fa-angle-down"></i>
+								</div>
+                                <ul>
+									<li><li ng-repeat="minInvestment in minimumInvestmentOptions">
+									<input type="checkbox" ng-model="minInvestment.checked"> {{minInvestment.investmentValue}}
+									</li>
+                                </ul>
+                                
+                            </li>
+                            
+                           
+                         <div class="button-group">
+							<button type="submit" ng-click="searchAdvisors()" class="btn btn-save">Search</button>
+						</div>
+
+                    </div>
+                </div>
+               <div>
+            
+            
+            <div class="myFolioListWrapper">
+				<ul class="myFolioList">
+					<li ng-repeat="advisor in searchResultAdvisors">
+						<a ng-href="#/advisory/details/{{advisor.advisoryId}}">
+							<div class="folioImageMask"><img src="content/images/img_puma.jpg" /></div>
+                            <div class="folioDetails">                                
+                              <h3 class="folioTitle">{{advisor.name}}</h3>
+                               <h1 class="folioPercentage"><i class="fa fa-arrow-up"></i></h1>                               
+                            </div>
+                          </a>
+                        
+                     </li>
+                     
+                  </ul>
+            </div>
+            
+            
+        
+        </div>
+    </div>
+    
+    </div>
+    </div>
+
+
+
+
+
+    <!--<script src="content/plugins/dataTable/jquery.dataTables.min.js"></script>
+    <script src="js/scripts.js"></script>
+    <script type="text/javascript">
+      
+    </script>-->
+
+     <script type="text/javascript">
+        $(document).ready(function () {
+            $('.filerAccordionHeader').click(function () {
+               $(this).next().slideToggle();             
+            });
+
+        });
+
+    </script>-

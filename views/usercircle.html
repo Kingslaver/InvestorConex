@@ -1,0 +1,36 @@
+<div class="contentarea" id="rightColumn">
+    <div class="pageTitle">
+        <h1>My Circle</h1>
+    </div>
+
+    <div class="mainWrapper createFolio">
+        <div class="row">
+
+            <div class="col-sm-4">
+                <select multiple="true" ng-change="circleSelected()" ng-model="mycircle" ng-options="mycircle.myCircleId as mycircle.name for mycircle in mycircleOptions" ng-disabled="{{mode=='Detail'}}"></select>
+            </div>
+
+            <div id="selectedstocks" class="customDataTableWrapper col-md-5">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th width="80%">Name</th>
+                            <th>Remove</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="circle in selectedCircle">
+                            <td width="80%">{{circle.user.firstName}}</td>
+                            <td align="center">
+                                <button ng-click="removeUser($index)" class="removeSelected">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>

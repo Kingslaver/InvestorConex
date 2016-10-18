@@ -1,0 +1,50 @@
+<div class="login">
+<div class="loginContainer">
+<div class="loginLogoBg"><img src="content/images/img_logo.jpg" /></div>
+<h1>Signup</h1>
+<div class="row">
+	<form name="signupForm">
+	
+	<p>Username:</p>
+	<input type="text" name="username" ng-model="userdata.userName" class="form-control" isusernameavailable/>
+    <p style="color: red" ng-show="signupForm.username.$error.isusernameavailable" class="help-block">*Name is not available. Please try different one.</p>
+	
+	<p>Password:</p>
+	<input type="password" class="form-control" id="password" name="password" ng-model="userdata.password" placeholder="password" required />
+	
+	<p>Confirm Password:</p>
+    <input type="password" class="form-control" id="password_c" name="password_c" ng-model="userdata.password_c" placeholder="confirm password" valid-password-c="userdata.password" required />
+    <p style="color: red"ng-show="signupForm.password_c.$error.noMatch" class="error">Passwords do not match.</span>
+    
+
+	<p>Email Address</p>
+	<input type="email" name="emailaddress" ng-model="userdata.emailAddress" class="form-control" isemailaddressalreadyregistered/>
+	<p style="color: red" ng-show="signupForm.emailaddress.$error.isemailaddressalreadyregistered" class="help-block">*You have already registered with this email address</p>
+	<input type="submit" ng-click="signup()" class="btn btn-primary" value="Signup"/>
+	</form>
+</div>
+</div>
+</div>
+
+
+<script>
+$(function(){
+	if($('body').find('.loginContainer').length > 0){
+		$('header').hide();
+		$('body').addClass('loginPage');
+	}
+
+	 function centerContent()
+	{
+		var container = $('body');
+		var content = $('.login');
+		//content.css("left", (container.width()-content.width())/2);
+		content.css("top", (container.height()-content.height())/2);
+	}
+	centerContent();
+	$(window).resize(function()
+	{
+		centerContent();
+	});
+});
+</script>

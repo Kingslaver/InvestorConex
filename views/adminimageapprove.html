@@ -1,0 +1,45 @@
+<div class="contentarea" id="rightColumn">
+		 
+	  <div class="myFolioListWrapper">
+				<ul class="myFolioList">
+					<li  ng-repeat="folio in myfolios">
+						<a ng-href="#/folios/{{folio.folioId}}">
+							
+							<img width="200" height="100" ng-src={{folio.image}}>
+                            <div class="folioDetails">
+                                <div class="pull-left">
+									 <a ng-href="#/folios/{{folio.folioId}}"><h3 class="folioTitle">{{folio.name}}</h3></a>
+                                     <h3 class="folioTitle"><a ng-href="#/users/{{folio.user.userName}}">{{folio.user.userName}}</a></h3>
+                                     <input type="radio" name="{{folio.name}}" value="yes" ng-model="folio.image_approved" >Approved<br>
+									 <input type="radio" name="{{folio.name}}" value="no"  ng-model="folio.image_approved">Declined
+                                </div>
+                               
+                            </div>
+                          </a>
+                        
+                     </li>
+                     
+                  </ul>
+       </div>
+       
+       <div class="button-group">
+			   <button type="submit" ng-click="save()" class="btn btn-primary">Save</button>
+		</div>
+      
+      	
+</div>
+
+	
+	
+	
+
+	
+
+		
+
+        
+
+
+       
+        
+        

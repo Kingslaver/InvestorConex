@@ -1,0 +1,223 @@
+<div class="contentarea" id="rightColumn">
+	<div class="pageTitle">
+		<h1>Analyst Recommendations</h1>
+	</div>
+
+	<div class="mainWrapper analystRecommWrapper">
+		<h2></h2>
+		<form name="analystRecommForm" role="form"
+			novalidate>
+
+			<div class="row">
+
+				<div class="col-md-4">
+					<div class="row">
+						<div class="col-md-12">
+							
+							<label class="control-label">Analyst Name</label>
+							<div class="row">
+							<div class="col-md-12">
+								<div class="row">
+								<div class="col-md-10">
+								<input type="text" class="form-control" ng-model="analystquery"
+									placeholder="Type an Analyst name here">
+								</div>
+								<div class="col-md-1">
+									<button type="submit" ng-click="addSelectedAnalyst()"
+										class="btn btn-save">
+										<i class="fa fa-plus"></i>
+									</button>
+								</div>
+								</div>
+							</div>
+							</div>
+							<select ng-model="selectedAnalystId"
+								ng-dblclick="addSelectedAnalyst()" size="10"
+								ng-options="analyst.id as analyst.name for analyst in analysts | filter:analystquery">
+								<option value="">Select One</option>
+							</select>
+
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-4">
+					<div class="row">
+						<div class="col-md-12">
+							
+							<label class="control-label">Stock Name</label>
+							<div class="row">
+							<div class="col-md-12">
+								<div class="row">
+								<div class="col-md-10">
+								<input type="text" class="form-control" ng-model="query"
+									placeholder="Type a Stock name here">
+								</div>
+								<div class="col-md-1">
+									<button type="submit" ng-click="addSelectedStock()"
+										class="btn btn-save">
+										<i class="fa fa-plus"></i>
+									</button>
+								</div>
+								</div>
+							</div>
+							</div>
+							<select ng-model="selectedStockId"
+								ng-dblclick="addSelectedStock()" size="10"
+								ng-options="stock.stockId as stock.stockName + '(' + stock.exchangeName + ')' for stock in stocks | filter:query">
+								<option value="">Select One</option>
+							</select>
+
+						</div>
+					</div>
+				</div>
+				
+				<div class="col-md-4">
+					
+					<div class="col-md-12">
+						<div class="row">
+						<label class="control-label">Recommendation Date Range</label>
+						</div>
+						<div class="row">
+							<md-datepicker
+							   ng-model="analystSearch.recommStartDate" 
+							   md-placeholder="Enter date">
+							</md-datepicker>
+								 
+						</div>
+						<div class="row">
+							<md-datepicker
+							   ng-model="analystSearch.recommEndDate" 
+							   md-placeholder="Enter date">
+							</md-datepicker>
+								 
+						</div>
+						<div class="row">
+							<label class="col-md-4"><input type="checkbox" ng-model="analystSearch.cbBuy" />Buy</label>
+						</div>
+						<div class="row">
+									<label class="col-md-4"><input type="checkbox"
+										ng-model="analystSearch.cbSell" />Sell</label>
+						</div>
+						<div class="row">
+									<label class="col-md-4"><input type="checkbox"
+										ng-model="analystSearch.targetHit" />Target Hit</label>
+						</div>
+					</div>
+				</div>
+						
+				
+
+
+			</div>
+			
+			<div class="row">
+				<div class="col-md-12">
+					<div class="row">
+						<div class="col-md-4">
+						<table id="selectedAnalystsTable"
+								class="table table-bordered table-striped">
+								<thead>
+									<tr>
+										<th>Analyst Name Selection</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="analyst in analystSearch.analystList">
+										<td>{{analyst.name}}
+											<button ng-click="removeAnalyst(analyst)"
+												class="btnTransparent btnRemove">
+												<i class="fa fa-times"></i>
+											</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="col-md-4">
+						<table id="selectedStocksTable"
+							class="table table-bordered table-striped">
+							<thead>
+								<tr>
+									<th>Stock Selection</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="stock in analystSearch.stocksList">
+									<td>{{stock.stockName}}
+										<button ng-click="removeStock(stock)"
+											class="btnTransparent btnRemove">
+											<i class="fa fa-times"></i>
+										</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						</div>
+					</div>
+					
+				</div>
+			
+			</div>
+			
+			<div class="col-md-12">
+				<div class="col-md-2 col-md-offset-5">
+						<button type="submit" ng-click="searchAnalyst()"
+						class="btn btn-save">Search</button>
+				</div>
+			</div>
+				
+	
+		<div class="row">
+		<div class="col-md-12">
+		<div id="selectedstocks" class="customDataTableWrappers">
+				<label>Recommendations</label>
+				<table id="createFolioTable"
+					class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th>Analyst Name</th>
+							<th>Stock Name</th>
+							<th>Buy/Sell</th>
+							<th width="10%">Price at the time of recommendation</th>
+							<th>Date Recommended</th>
+							<th>Target Price</th>
+							<th>Status</th>
+							<th>Link</th>
+
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="recomm in analystRecommendations">
+							<td>{{recomm.advisor.name}}</td>
+							<td>{{recomm.stock.stockName}}</td>
+							<td>{{recomm.buySell === 1 ? 'Buy' : 'Sell'}}</td>
+							<td width="10%">{{recomm.marketPrice}}</td>
+							<td>{{recomm.dateRecommended | date:'yyyy-MM-dd'}}</td>
+							<td>{{recomm.price}}</td>
+							<td>{{recomm.recSuccessfull === 1 ? 'Target Hit' : 'Open'}}</td>
+							<td><a href="{{recomm.link}}" target="_blank">NewsSource</a></td>
+						</tr>
+					</tbody>
+				</table>
+
+
+					<div class="row">
+					
+						<div class="col-md-4">
+						<a href="" ng-click="getPrevPage()">Prev</a>
+						Page {{pageNumber}} out of {{totalPages}}
+						<a href="" ng-click="getNextPage()">Next</a>
+						</div>
+					</div>
+					
+			</div>
+		
+		</div>
+		</div>
+		</form>
+	</div>
+
+</div>
+
+

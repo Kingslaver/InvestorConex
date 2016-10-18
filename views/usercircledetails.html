@@ -1,0 +1,49 @@
+<div class="contentarea" id="rightColumn">
+    <div class="pageTitle">
+        <h1>My Circle</h1>
+        <a class="btn btn-primary" ui-sref="usercirclenew"><i class="fa fa-plus"></i></a></a>
+        <a class="btn btn-primary" ui-sref="usercircleedit({myCircleId:mycircle})"><i class="fa fa-pencil"></i></a>
+    </div>
+ 
+    <div class="mainWrapper">
+		 <form class="col-md-12" name="folioForm" role="form" novalidate>
+			<div class="row">
+
+            <div class="col-sm-4" ng-show="mode!='Edit'">
+                <select multiple="false" ng-change="circleSelected()" ng-model="mycircle" ng-options="mycircle.myCircleId as mycircle.name for mycircle in mycircleOptions" ng-disabled="{{mode=='Detail'}}"></select>
+            </div>
+            
+           
+                            
+            
+            <div id="selectedstocks" class="customDataTableWrapper col-sm-4">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th width="80%">User List</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="user in selectedCircleUsers">
+                            <td width="80%">{{user.user.firstName}}</td>
+                           
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        
+         
+         
+        
+    </div>
+    </form>
+    
+    
+</div>
+
+
+            
+            

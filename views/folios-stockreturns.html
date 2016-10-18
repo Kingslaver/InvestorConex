@@ -1,0 +1,28 @@
+<div class="contentarea" id="rightColumn">
+    <div class="pageTitle">
+        <h1>Stock Returns</h1>        
+    </div>
+    <div class="mainWrapper stockReturns">
+        <div class="col-md-12">
+            <canvas id="line" class="chart chart-line" data="data" labels="labels" legend="true" series="series" click="onClick"></canvas> 
+        </div>
+		<div class="col-md-12">
+    		<table class="table table-bordered table-striped">
+                <thead>
+                    <th>Name</th>
+                    <th>Symbol</th>
+                    <th>Date</th>
+                    <th>Profit %</th>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="folioStockReturn in folioStockReturnsData">
+                        <td>{{folioStockReturn.stock.stockName}}</td>
+                        <td>{{folioStockReturn.stock.stockSymbol}}</td>
+                        <td>{{folioStockReturn.timestamp | date:'yyyy-MM-dd'}}</td>
+                        <td>{{folioStockReturn.profitPct}}</td>
+                    </tr>
+                </tbody>
+            </table>
+         </div>
+	</div>	
+</div>

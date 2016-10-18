@@ -1,0 +1,83 @@
+<div class="contentarea" id="rightColumn">
+    <div class="pageTitle">
+        <h1>Investment Profile Details</h1>
+    </div>
+    <div class="mainWrapper investmentProfile">
+        <form class="col-md-12">
+			<ul>
+				<li>
+					<div class="invProfileHeader"><div class="numberCircle">1</div><p>How would you best describe your attitude towards investing?</p></div>
+					<div class="invProfileContent">
+							<p><input type="radio" name="investmentAttitude" ng-model="userdata.investmentAttitude" value="1">
+							<span>Preserve my capital.  I would rather have a low rate of return and know my initial capital is secure. </span></p>
+							
+							<p><input type="radio" name="investmentAttitude" ng-model="userdata.investmentAttitude" value="2">
+							<span>I want my investment to produce income I need.  My capital should remain relatively stable. </span></p>
+							
+							<p><input type="radio" name="investmentAttitude" ng-model="userdata.investmentAttitude" value="3">
+							<span>I understand that the value of my investment(s) may fluctuate.  I am willing to accept some fluctuations in my capital for the potential of achieving higher returns over the longer term. </span></p>
+
+							<p><input type="radio" name="investmentAttitude" ng-model="userdata.investmentAttitude" value="4">
+							<span>I am willing to accept a high degree of risk for the potential of achieving a higher rate of return over the longer term. </span></p>
+					</div>
+				</li>
+				<li>
+					<div class="invProfileHeader"><div class="numberCircle">2</div><p>When do you expect to need to withdraw cash from your investment portfolio (assuming no emergency or accidental cash need)?</p></div>
+					<div class="invProfileContent">
+						<select name="investmentTimeline" ng-model="userdata.investmentTimeline" ng-options="investmenttimeline.Id as investmenttimeline.Value for investmenttimeline in InvestmentTimelineOptions">
+						   </select>
+					</div>
+				</li>
+				<li>
+					<div class="invProfileHeader"><div class="numberCircle">3</div><p>What annual rate of return do you expect from your investment(s) to meet your stated objectives?</p></div>
+					<div class="invProfileContent">
+							<p><input type="radio" name="expectedReturn" ng-model="userdata.expectedReturn" value="1">
+							<span>Less than 10% with less to no risk </span></p>
+							
+							<p><input type="radio" name="expectedReturn" ng-model="userdata.expectedReturn" value="2">
+							<span>10 to 15% with relatively less risk  </span></p>
+							
+							<p><input type="radio" name="expectedReturn" ng-model="userdata.expectedReturn" value="3">
+							<span>15 to 20% with medium risk  </span></p>
+							
+							<p><input type="radio" name="expectedReturn" ng-model="userdata.expectedReturn" value="4">
+							<span>Above 20% with high risk </span></p>
+					
+					</div>
+				</li>
+				<li>
+					<div class="invProfileHeader"><div class="numberCircle">4</div><p>How familiar are you with investment markets?</p></div>
+					<div class="invProfileContent">
+							<p><input type="radio" name="investmentFamiliarty" ng-model="userdata.investmentFamiliarty" value="1">
+							<span>No experience at all </span></p>
+							
+							<p><input type="radio" name="investmentFamiliarty" ng-model="userdata.investmentFamiliarty" value="2">
+							<span>Not very familiar, mainly invested in bank deposits and mutual funds </span></p>
+							
+							<p><input type="radio" name="investmentFamiliarty" ng-model="userdata.investmentFamiliarty" value="3">
+							<span>Some experience with investing in equity market though don’t do much market analysis before investing etc.</span></p>
+							
+							<p><input type="radio" name="investmentFamiliarty" ng-model="userdata.investmentFamiliarty" value="4">
+							<span>Wide experience with a range of investments in shares, bonds, Initial Public Offerings (IPO's), options, etc. and usually do market research before investing</span></p>
+					</div>
+				</li>
+				<li>
+					<div class="invProfileHeader"><div class="numberCircle">5</div><p>What’s your average investment in equity market over last 2 years</p></div>
+					<div class="invProfileContent">
+							<select name="InvestmentAmount" ng-model="userdata.investmentAmount" ng-options="investmentAmount.Id as investmentAmount.Value for investmentAmount in InvestmentAmountOptions">
+						   </select>
+					</div>
+				</li>
+			</ul>
+		
+		
+         
+
+            <div class="button-group">
+                <button type="button" ng-click="updateUser()" class="btn btn-save">Save</button>
+                <button type="button" class="btn btn-cancel">Clear</button>
+            </div>
+        </form>
+    </div>
+
+</div>

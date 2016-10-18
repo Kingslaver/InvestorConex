@@ -1,0 +1,34 @@
+﻿@media only screen and (max-width: 766px) {
+    .sidebar{-moz-transform: translate3d(-230px, 0, 0); -moz-transition: -moz-transform 500ms ease;}
+    .contentarea{margin-left:0;}
+    .dashboardWrapper .col-md-8, .dashboardWrapper .col-md-4{padding:0;}
+    .navToggle{display:block;}
+
+    .createFolio .nav-pills > li{float:none;margin-bottom:1px;}
+    .nav-pills > li + li{margin:0;}
+    .tabbable{margin:10px;}
+    form.col-md-12{margin:10px 10px 10px 0;padding:0;}
+    .createFolio .form-group .col-sm-4,  .createFolio .form-group .col-sm-8{text-align:left;padding:0;}
+    .createFolio .createFolioButtons .button-group{float:none;margin-bottom:10px;}
+    .createFolio select{width:100%;}
+    .tabbable .nav.nav-pills a{padding:15px;}
+    .createFolio .stocksWrapper{position:relative;}
+    .createFolio .stocksWrapper input[type="text"]{width:100%;}
+    .createFolio .stocksWrapper button{position:absolute;right:0;}
+    .creatFolio{padding:0;}
+    .creatFolio .col-md-1, .creatFolio .col-md-11{padding:0;}
+    .createFolio .button-group, .searchFolio .button-group, .userbasicDetails .button-group, .investmentProfile .button-group{margin:0;}
+    .createFolio .btn-primary, .searchFolio .btn-save, .userbasicDetails .btn-save, .userbasicDetails .btn-cancel, .investmentProfile .btn{width:100%;}
+    .userbasicDetails .btn-cancel{margin-top:10px;}
+    .investmentProfile .btn{margin-bottom:10px;}
+
+    .col-md-5{padding:0;}
+    .searchFolio .col-md-12{padding:0 15px;}
+
+    .userbasicDetails .col-md-12, .investmentProfile .col-md-12{padding:0 15px;}
+
+    .messageCenter .tabbable{padding:15px;}
+    .messageCenter .tabbable .col-sm-9 .tabbable{padding:0;}
+    .messageCenter .col-sm-9{padding:0;}
+    .messageCenter .col-md-8 {padding:0;margin:0;}
+}

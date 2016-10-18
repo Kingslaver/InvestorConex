@@ -1,0 +1,291 @@
+
+
+<div id="landingPageWrapper">
+    <div class="sliderSection">
+        <div class="sliderMobileView">
+            <img src="images/slider_mobile.jpg" />
+        </div>
+        <div id="myCarousel" class="carousel slide" data-interval="5000" data-ride="carousel">
+            <!-- Carousel items -->
+            <div class="carousel-inner">
+                <div class="active item">
+                    <div class="sliderText">
+                        <h1>Watching market is NOT necessary to invest anymore</h1>
+                        <a href="#" class="btn btn-primary">Read more</a>
+                    </div>
+                    <div class="sliderOverlay"></div>
+                    <img src="images/1_slider_1.jpg" />
+                </div>
+                <div class="item">
+                    <div class="sliderText">
+                        <h1>With virtual investment, earn money even if you don't have cash to invest</h1>
+                        <a href="#" class="btn btn-primary">Read more</a>
+                    </div>
+                    <div class="sliderOverlay"></div>
+                    <img src="images/2_slider_2.jpg" />
+                </div>
+                <div class="item">
+                    <div class="sliderText">
+                        <h1>Talk to successful investors, learn the techniques from gurus and earn money. Well It's  that simple</h1>
+                        <a href="#" class="btn btn-primary">Read more</a>
+                    </div>
+                    <div class="sliderOverlay"></div>
+                    <img src="images/3_slider_3.jpg" />
+                </div>
+                <div class="item">
+                    <div class="sliderText">
+                        <h1>Discuss current market movements with leaders, and decide on investment strategy.</h1>
+                        <a href="#" class="btn btn-primary">Read more</a>
+                    </div>
+                    <div class="sliderOverlay"></div>
+                    <img src="images/4_slider_4.jpg" />
+                </div>
+
+            </div>
+            <!-- Carousel nav -->
+            <a class="carousel-control left">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+            <a class="carousel-control right">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
+        </div>
+    </div>
+
+
+    <div class="topPerformingFoliosContainer landingPage">
+        <div class="col-md-12 topPerformingFolios">
+            <!--<img src="content/images/icon_trendingFolios.jpg">-->
+            <h2>Top Performing Folios</h2>
+            <p>Based on Monthly Returns </p>
+            <div class="row">
+                <div class="myFolioListWrapper">
+
+                    <ul class="myFolioList">
+                        <li ng-repeat="folio in searchResultFolios">
+                            <a ng-href="#/folios/{{folio.folioId}}"><div class="folioImageMask"><img width="200" height="100" ng-src={{folio.image}}></div></a>
+                            <div class="folioDetails">
+                                <h3 class="folioTitle">{{folio.name}}</h3>
+                                <h1 class="folioPercentage">{{folio.returns}}%</h1>
+                            </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-12 searchAdvisor">
+            <div class="col-md-7">
+                <!--<img src="content/images/img_searchAdvisor.jpg" />-->
+                <h2>Top Rated Advisors</h2>
+
+                <div class="row main_searchAdvisorContainer">
+                    <div class="folioNavWrapper">
+                        <div class="folioNav">
+                            <a class="folioNavLeft" ng-hide="(pageNumber===0)" ng-click="getTopFoliosForHomePage(pageNumber-1)"><i class="fa fa-arrow-left"></i></a>
+                            <a class="folioNavRight" ng-hide="(pageNumber+1)===totalPages" ng-click="getTopFoliosForHomePage(pageNumber+1)"><i class="fa fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <ul class="myFolioList main_searchAdvisorList">
+                        <li ng-repeat="advisor in searchResultAdvisors">
+                            <a ng-href="#/advisory/details/{{advisor.advisoryId}}">
+                                <div class="folioImageMask"><img src="content/images/img_advisor1.jpg" class="img-responsive" /></div>
+                                <div class="folioDetails">
+                                    <h3 class="folioTitle">{{advisor.name}}</h3>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <h2>Find a Financial Advisor</h2>
+                <div class="findFinancialAdvisor">
+                    <div class="form-group">
+                        <label>Search</label>
+                        <div class="searchAdvisorControl">
+                            <input type="text" class="form-control" />
+                            <div id="searchFinancialAdvisor" class="fa fa-search"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="whyUs">
+        <div class="container">
+            <h2>Why Us</h2>
+
+            <div style="background-color: #f9f9f9;">
+                <ul>
+                    <li>
+                        <img src="content/images/img_thematic.png" />
+                        <p>Track your investments through folios.</p></br>
+                        <div><div id="m1" class="showlink"><a ng-click="ShowWhyUsDialog('1')">More</a></div></div>
+                    </li>
+                    <li>
+                        <img src="content/images/img_tools.png" />
+                        <p>View top analyst recommendations at one place.</p>
+                        <div><div id="m2" class="showlink"><a ng-click='ShowWhyUsDialog("2")'>More</a></div></div>
+                    </li>
+                    <li>
+                        <img src="content/images/img_money.png" />
+                        <p>Option to follow top earning folios.</p></br>
+                        <div><div id="m3" class="showlink"><a ng-click='ShowWhyUsDialog("3")'>More</a></div></div>
+                    </li>
+                    <li>
+                        <img src="content/images/img_social_tools.png" />
+                        <p>Search for a financial adviser near you </p></br>
+                        <div><div id="m4" class="showlink"><a ng-click='ShowWhyUsDialog("4")'>More</a></div></div>
+                    </li>
+                    <li>
+                        <img src="content/images/img_safety_security.png" />
+                        <p>Communicate with successful investors </p></br>
+
+                        <div><div id="m5" class="showlink"><a ng-click='ShowWhyUsDialog("5")'>More</a></div></div>
+                    </li>
+                </ul>
+                <div class="container" id="whyUS" style="display:none;">
+                    <div style="width:95%">
+                        <div>
+                            <div class="bootstrap-dialog-header">
+                                <div class="bootstrap-dialog-close-button" style="display: block;">
+                                    <button class="close" onclick=" $('#whyUS').hide(1000); $('.showlink').show();">x</button>
+                                </div>
+                                <div class="bootstrap-dialog-title" style="text-align:left;">
+                                    <h4><b>{{whyUsTitle}}:</b></h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-body">
+                            <div class="bootstrap-dialog-body">
+                                <div class="bootstrap-dialog-message" style="text-align:left;">
+                                    <p>
+                                        &nbsp;&nbsp;{{whyUsContent}}
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer" style="display: none;">
+                            <div class="bootstrap-dialog-footer"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!--<div class="highLights hide">
+            <div class="container">
+                <h2>Do you want to know the Smart Way of Investment?</h2>
+                <a class="btn btn-primary btn-blue">Read more</a>
+            </div>
+        </div>-->
+        <div class="videoContainer">
+            <div class="container">
+                <div class="col-md-4">
+                    <h3>How it works?</h3>
+                    <img src="content/images/img_video.jpg" />
+                </div>
+                <div class="col-md-8">
+                    <h3>What our customers are saying</h3>
+                    <ul class="testimonials">
+                        <li>
+                            <p>"This new of investing saves a lot of time for me, I can just follow the folios and sit back"</p>
+                            <b>Suraj Sharma</b>
+                        </li>
+                        <li>
+                            <p>"Getting an opportunity to chat directly investment gurus is the best feature I find here"</p>
+                            <b>Mumbai Voice</b>
+                        </li>
+                        <li>
+                            <p>"Getting an opportunity to chat directly investment gurus is the best feature I find here"</p>
+                            <b>Mumbai Voice</b>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+
+        </div>
+
+        <hr />
+        <div align="center">
+            &copy;Copy right. All rights reserved - 2016
+        </div>
+    </div>
+
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        // Activate carousel
+        $("#myCarousel").carousel();
+
+        // Enable carousel control
+        $(".left").click(function () {
+            $("#myCarousel").carousel('prev');
+        });
+        $(".right").click(function () {
+            $("#myCarousel").carousel('next');
+        });
+
+        /*if($('#landingPageWrapper').length > 0){
+            $('.navToggle').hide();
+        }*/
+
+        /*$("#searchAdvisorCarousel").carousel();
+        $("#searchAdvisorLeft").click(function () {
+            $("#searchAdvisorCarousel").carousel('prev');
+        });
+        $("#searchAdvisorRight").click(function () {
+            $("#searchAdvisorCarousel").carousel('next');
+        });*/
+
+
+    });
+
+    //function ShowWhyUsDialog(whyusstr) {
+    //    console.log('ShowWhyUsDialog');
+    //    var WhyusStr = '';
+    //    var title = '';
+    //    switch (whyusstr) {
+    //        case '1':
+    //            WhyusStr = '<p>&nbsp &nbsp Folio is basically a part of your entire portfolio, which can contain up to 10 stocks. Through Folio you can track your holdings more closely. By creating folios with us, you can compete with your own investment targets and compare your success ratio with others. Your weekly ranking may fetch you lucrative prizes as well.<p>';
+    //            title = 'Track your investments through folios';
+    //            break;
+    //        case '2':
+    //            WhyusStr = '<p>&nbsp &nbsp We bring you the top analyst recommendations at one place. With this unique feature you can view recommendations based on a particular stock, Analyst name or for a given time period.<p>';
+    //            title = 'View top analyst recommendations at one place';
+    //            break;
+    //        case '3':
+    //            WhyusStr = '<p>&nbsp &nbsp We track all folios created through us and rank them based on their performances. You have an option to follow other successful folios and view the holdings inside them (as long as the creator is OK with it). Through this you can expand your investment ideas by analyzing strategies of other successful investors.<p>';
+    //            title = 'Option to follow top earning folios';
+    //            break;
+    //        case '4':
+    //            WhyusStr = "<p>&nbsp &nbsp If you like someone to take care of your investments and give you maximum return with very minimal or no commission. Then we may have somebody just for your need nearby you. Search for a certified SEBI registered investment advisor near you and click on \"Contact me\". You will be contacted by the advisor for free, you have no obligation to connect with them if you don't like their ideas.<p>";
+    //            title = 'Search for a financial adviser near you';
+    //            break;
+    //        case '5':
+    //            WhyusStr = '<p>&nbsp &nbsp Using our blog and messaging feature you can directly communicate with successful investors with high ranked folios or high number of followers.<p>';
+    //            title = 'Communicate with successful investors';
+    //            break;
+    //        default:
+
+    //    }
+
+    //    ShowDialog(title, WhyusStr);
+
+
+    //}
+
+    //function ShowDialog(title, WhyusStr) {
+    //    BootstrapDialog.show({
+    //        title: title,
+    //        message: WhyusStr
+    //    });
+    //}
+</script>

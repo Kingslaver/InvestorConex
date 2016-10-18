@@ -1,0 +1,57 @@
+{
+  "folios":[
+    {
+        "folioId": 1,
+        "name": "Super Folio",
+        "description": "Value Investing Folio",
+        "emailAddress": "",
+        "folio_type_id": 0,
+        "timeLine": "10 months",
+        "riskAppetite": "medium",
+        "expectedReturn": "10%",
+        "keywords": "banking,real estate",
+        "folioStocks": [
+            {
+                "id": 1,
+                "stock": {
+                    "stockId": 3000,
+                    "stockSymbol": "20MICRONS",
+                    "stockName": "20 Microns",
+                    "series": "EQ",
+                    "paidUpValue": "5",
+                    "marketLot": "5",
+                    "isinNumber": "INE",
+                    "faceValue": "5",
+                    "exchangeName": "NSE",
+                    "sector": "Sector",
+                    "dateOfListing": "06-oct-2008"
+                },
+                "entryPrice": 100,
+                "quantity": 100,
+                "new": false
+            },
+            {
+                "id": 2,
+                "stock": {
+                    "stockId": 3001,
+                    "stockSymbol": "3IIINFOTECH",
+
+                    "stockName": "3I Infotech",
+                    "series": "EQ",
+                    "paidUpValue": "5",
+                    "marketLot": "5",
+                    "isinNumber": "INE",
+                    "faceValue": "5",
+                    "exchangeName": "NSE",
+                    "sector": "Sector",
+                    "dateOfListing": "06-oct-2008"
+                },
+                "entryPrice": 100,
+                "quantity": 100,
+                "new": false
+            }
+        ],
+        "id": 1
+    }
+]
+}

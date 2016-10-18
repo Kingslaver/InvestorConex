@@ -1,0 +1,10 @@
+<label>Search Results</label>
+
+			
+			<ul ng-repeat="advisor in searchResultAdvisors">
+			
+				 <!-- <a ng-href="#/advisory/details/{{advisor.advisoryId}}">{{advisor.name}}</a><p> -->
+				 <a ui-sref="advisory.list.details({advisoryId:advisor.advisoryId})">{{advisor.name}}</a>
+				 
+		   	 </ul>
+		

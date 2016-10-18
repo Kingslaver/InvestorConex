@@ -1,0 +1,282 @@
+﻿<!doctype html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css" />
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="js/textAngular/textAngular.css" />
+    <link rel="stylesheet" href="bower_components/angular-slider/slider.css" />
+	<link rel="stylesheet" href="bower_components/jquery-ui/themes/base/jquery-ui.css" />
+	<link rel="stylesheet" href="bower_components/angucomplete/angucomplete.css" />
+	<link rel="stylesheet" href="bower_components/ag-grid/dist/angular-grid.min.css" />
+	<link rel="stylesheet" href="bower_components/ag-grid/dist/theme-fresh.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.0.9/angular-material.min.css" />
+	
+	
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <!-- <link rel="stylesheet" href="styles/main.css">-->
+    <link href="content/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link href="content/bootstrap-3.3.5/css/bootstrap-dialog.min.css" rel="stylesheet"><!-- added by raja for dialog box-->
+    <link rel="stylesheet" href="styles/dashboard.css">
+    <!--<link rel="stylesheet" href="styles/mobile.css">-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,700,600,300' rel='stylesheet' type='text/css'>
+    <link href="content/plugins/dataTable/jquery.dataTables.min.css" rel="stylesheet" />
+    <!-- endbuild -->
+	
+	
+</head>
+<body ng-app="afwebappApp" class="ng-cloak">
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <!-- Add your site or application content here change-->
+    <header>
+        <div  ng-controller="LoginCtrl">
+            
+            <a href="#/index.html" id="logo"><img src="content/images/img_logo.jpg" /></a>
+            <div class="userSection" ng-hide="authenticated">
+                <a ui-sref="login" class="btn btn-primary btn-blue" id="btnLogin">Login</a>
+                <a ui-sref="signup" class="btn btn-primary btn-blue" id="btnSignup">Sign up</a>
+            </div>
+            <div class="userSection" ng-cloak ng-hide="!authenticated">				
+                <div class="navToggle"><i class="fa fa-navicon"></i><i class="fa fa-arrow-left"></i></div>
+				<div class="userNameWrapper">                    
+                    <p>Welcome <b>{{loggedInUser.firstName}}!</b></p>                    
+                </div>
+				<div class="userSectionIcons">
+					<a class="fa fa-home" id="btnHome" href="#/index.html"></a>
+					<a class="fa fa-tachometer" id="btnDashboard" ui-sref="dashboard"></a>
+					<a href="/api/mylogout">Logout</a>
+				</div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="primary hide"></nav>
+
+    <div class="wrapper ng-cloak" ng-cloak>
+        <div class="sidebar ng-cloak" id="leftColumn" ng-hide="hideMenu" ng-cloak>
+			<div class="minimizeSidebarButton"><i class="fa fa-arrow-left"></i></div>
+            <ul class="accordion">
+                <li><a ui-sref="dashboard"><span><i class="fa fa-dashboard" data-toggle="tooltip" data-placement="right" title="Dashboard"></i><b>Dashboard</b></a></span></li>
+                <li>
+                    <a href="#"><i class="fa fa-user"></i><b>My Account</b> <i class="fa fa-angle-left" data-toggle="tooltip" data-placement="right" title="My Account"></i></a>
+                    <ul>
+                        <li><a ui-sref="folios"><i class="fa fa-user" data-toggle="tooltip" data-placement="right" title="My Folio"></i><b>My Folio</b></a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-photo"></i><b>Folio</b> <i class="fa fa-angle-left"></i></a>
+                    <ul>
+                        <li><a ui-sref="foliosnew"><i class="fa fa-plus-circle" data-toggle="tooltip" data-placement="right" title="Create Folio"></i><b>Create Folio</b></a></li>
+                        <li><a ui-sref="foliosearch"><i class="fa fa-search" data-toggle="tooltip" data-placement="right" title="Search Folio"></i><b>Search Folio</b></a></li>
+                    </ul>
+                </li>
+                <li><a ui-sref="advisory"><i class="fa fa-search" data-toggle="tooltip" data-placement="right" title="Search Advisor"></i><b>Search Advisor</b></a></li>
+
+                <li>
+                    <a href="#"><i class="fa fa-user" data-toggle="tooltip" data-placement="right" title="User Profile"></i><b>User Profile</b> <i class="fa fa-angle-left"></i></a>
+                    <ul>
+                        <li><a ui-sref="userbasic"><i class="fa fa-file-text-o" data-toggle="tooltip" data-placement="right" title="Personal Details"></i><b>Personal Details</b></a></li>
+                        <li><a ui-sref="userinvestmentprofile"><i class="fa fa-user" data-toggle="tooltip" data-placement="right" title="Risk Profile"></i><b>Risk Profile</b></a></li>
+                        <li><a ui-sref="usertradeprofile"><i class="fa fa-user" data-toggle="tooltip" data-placement="right" title="Trade Profile"></i><b>Trade Profile</b></a></li>
+                        <li><a ui-sref="userconnections"><i class="fa fa-user" data-toggle="tooltip" data-placement="right" title="My Connections"></i><b>My Connections</b></a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <div class="moreMenu">
+                <b>More</b>
+                <ul>
+                    <li><a ng-href="#/messageCenter/messages"><i class="fa fa-envelope"></i><b>Message ({{loggedInUser.messagesCount}})</b></a></li>
+                    <li><a href="#"><i class="fa fa-question-circle"></i><b>How it works</b></a></li>
+                    <li><a href="#"><i class="fa fa-question-circle"></i><b>FAQ</b></a></li>
+                    <li><a href="#"><i class="fa fa-comment"></i><b>Chat</b></a></li>
+                    <li><a href="#"><i class="fa fa-rss"></i><b>Blog</b></a></li>
+
+                </ul>
+            </div>
+
+
+        </div>
+
+        <div id="rightColumn">
+            <div ui-view></div>
+        </div>
+
+    </div>
+<div id="gotoTop" title="Back to Top"><i class="fa fa-arrow-up"></i></div>
+
+
+
+
+
+
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="content/bootstrap-3.3.5/js/jquery.min.js"></script>
+	<script src="content/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+    <script src="content/bootstrap-3.3.5/js/bootstrap-dialog.min.js"></script><!-- added by raja for dialog box-->
+	
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/Chart.js/Chart.js"></script>
+    <script src="bower_components/angular-chart.js/dist/angular-chart.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
+    <script src="bower_components/angular-modal-service/dst/angular-modal-service.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/angular-ui-grid/ui-grid.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/ag-grid/dist/angular-grid.min.js"></script>
+    <script src="bower_components/angular-recaptcha/release/angular-recaptcha.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.0.9/angular-material.min.js"</script>
+	
+    
+    <!--reCaptcha: -->
+    <script src="https://www.google.com/recaptcha/api.js?onload=vcRecaptchaApiLoaded&render=explicit" async defer></script>
+	 <!--reCaptcha: -->
+   
+	<!--<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>-->
+	
+    <script src="bower_components/jquery-ui/jquery-ui.js"></script>
+    <script src="bower_components/rangy/rangy-core.js"></script>
+    <script src="bower_components/rangy/rangy-classapplier.js"></script>
+    <script src="bower_components/rangy/rangy-highlighter.js"></script>
+    <script src="bower_components/rangy/rangy-selectionsaverestore.js"></script>
+    <script src="bower_components/rangy/rangy-serializer.js"></script>
+    <script src="bower_components/rangy/rangy-textrange.js"></script>
+    <script src="bower_components/textAngular/dist/textAngular.js"></script>
+    <script src="bower_components/textAngular/dist/textAngular-sanitize.js"></script>
+    <script src="bower_components/textAngular/dist/textAngularSetup.js"></script>
+    <script src="bower_components/angular-slider/slider.js"></script>
+    <script src="bower_components/angucomplete/angucomplete.js"></script>
+    
+    <!-- endbuild -->
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/app.js"></script>
+	
+	<!--Services: -->
+    <script src="scripts/services/common-url-service.js"></script>
+    <script src="scripts/services/userservice.js"></script>
+    <script src="scripts/services/test.js"></script>
+    <script src="scripts/services/folios-service.js"></script>
+    <script src="scripts/services/advisory-services.js"></script>
+    <script src="scripts/services/google-services.js"></script>
+    <script src="scripts/services/trade-service.js"></script>
+    <script src="scripts/services/util-services.js"></script>
+    <script src="scripts/services/base-services.js"></script>
+    <!-- end Services: -->
+    <!--- Directives: -->
+    <script src="scripts/services/validation.js"></script>
+    <!--- end Directives: -->
+    <!--Controller: -->
+    <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/user.js"></script>
+    <script src="scripts/controllers/user-page.js"></script>
+    <script src="scripts/controllers/csv.js"></script>
+     <script src="scripts/controllers/admin-controller.js"></script>
+	<script src="scripts/controllers/myfolio.js"></script>
+    <script src="scripts/controllers/modalcontroller.js"></script>
+    <script src="scripts/controllers/login-controller.js"></script>
+    <script src="scripts/controllers/folios-new-controller.js"></script>
+    <script src="scripts/controllers/folio-list-controller.js"></script>
+    <script src="scripts/controllers/folios-search-controller.js"></script>
+    <script src="scripts/controllers/folio-details-controller.js"></script>
+    <script src="scripts/controllers/advisory-controller.js"></script>
+    <script src="scripts/controllers/advisory-id-controller.js"></script>
+    <script src="scripts/controllers/trades-controller.js"></script>
+    <script src="scripts/controllers/trades-new-controller.js"></script>
+    <script src="scripts/controllers/dashboard-controller.js"></script>
+    <script src="scripts/controllers/dashboard-trending-controller.js"></script>
+    <script src="scripts/controllers/dashboard-recommended-controller.js"></script>
+    <script src="scripts/controllers/dashboard-analystrecomm-controller.js"></script>
+    <script src="scripts/controllers/dashboard-topfolioscontroller.js"></script>
+    <script src="scripts/controllers/messageCenter-controller.js"></script>
+    <script src="scripts/controllers/mycircle-controller.js"></script>
+    <script src="scripts/controllers/mycircle-edit-controller.js"></script>
+    <script src="scripts/controllers/folio-details-stock-returns-controller.js"></script>
+    <script src="scripts/controllers/userconnections-controller.js"></script>
+        
+    <!--end Controller: -->
+    <!--Model: -->
+    <script src="scripts/model/messageCenterModel.js"></script>
+    <script src="scripts/model/blogModel.js"></script>
+    <!--end Model: -->
+    <!-- endbuild -->
+
+    <!--<script src="content/plugins/dataTable/jquery.dataTables.min.js"></script>-->
+    <script src="js/scripts.js"></script>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css" />
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="js/textAngular/textAngular.css" />
+    <!-- The actual modal template, just a bit o bootstrap -->
+    <script type="text/ng-template" id="modal.html">
+        <div class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Yes or No?</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            TraderJINI will contact you in the phone number mentioned {{phoneNumber}}. If its not correct
+                            please go back and update to your current information
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">No</button>
+                        <button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">Yes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script type="text/ng-template" id="AdvisorContactInformation.html">
+        <div class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Proceed?</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Your contact details mentioned in your profile will be shared with the Advisor.Please ensure they are accurate</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">No</button>
+                        <button type="button" ng-click="close('Yes')" class="btn btn-primary" data-dismiss="modal">Yes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+
+
+
+
+
+
+
+
+</body>
+</html>

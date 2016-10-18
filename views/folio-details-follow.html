@@ -1,0 +1,144 @@
+	<div class="row">
+
+					
+		  <div class="col-md-8">
+
+ <form role="form">
+			      
+
+			 <div class="form-group">
+			     <label>Investment Time Line</label>
+			     <input type="text" class="form-control" ng-model="foliodata.timeLine" disabled>
+			</div>
+
+			<select ng-model="foliodata.timeLineDuration" size="5" ng-options="timeLine.Id as timeLine.TimeLine for timeLine in timeLineOptions" disabled></select >
+
+ 			<div class="form-group">
+			      <label>Risk Appetite</label>
+			      <input type="text" class="form-control" ng-model="foliodata.riskAppetite" disabled>
+			    </div>
+
+			<div class="form-group">
+			      <label>Expected Return</label>
+			      <input type="text" class="form-control" ng-model="foliodata.expectedReturn" disabled>
+			    </div>
+
+			<div class="form-group">
+			      <label>Keywords</label>
+			      <input type="text" class="form-control" ng-model="foliodata.keywords" disabled>
+			</div>
+		 </form>
+		</div>
+
+		
+		 <div class="col-md-12" style="margin-bottom:40px">
+			 <span style="color:blue"><label>Original Allocation</label></span>
+			 
+			 <div class="form-group">
+			      <label>Cost </label>
+			      <input type="text" class="form-control" ng-model="foliodata.cost" disabled>
+			   </div>
+			 
+			 <div class="form-group">
+			      <label>Current Folio Value </label>
+			      <input type="text" class="form-control" ng-model="foliodata.currentFolioValue" disabled>
+			   </div>
+
+			<table class="table table-bordered table-striped" disabled>
+					<thead>
+                   
+					    <th>Symbol</th>
+					   <th>Name</th>
+					   <th>Exchange</th>
+					   <th>Sector</th>
+					   <th>Entry Price</th>
+					   <th>Market Price</th>
+					   <th>Quantity</th>
+					   <th>Weightage</th>
+					   <th>Profit</th>
+					   <th>Profit Pct</th>
+					   
+					   </thead>
+
+					<tbody>
+					    
+					    <tr ng-repeat="stock in foliodata.folioStocks">
+					    <td>{{stock.stock.stockSymbol}}</td>
+					    <td>{{stock.stock.stockName}}</td>
+					    <td>{{stock.stock.exchangeName}}</td>
+					    <td>{{stock.stock.sector}}</td>
+					    <td>{{stock.entryPrice}}</td>
+					    <td>{{stock.marketPrice}}</td>
+					    <td>{{stock.quantity}}</td>
+					    <td>{{stock.weightage}}</td>
+					    <td>{{stock.profit | number:2}}</td>
+					    <td>{{stock.profitPct | number:2}}</td>
+					   
+	
+					    </tr>
+
+	
+				</tbody>
+        
+				</table>
+   
+
+
+
+		</div>
+		
+		
+		 <div class="col-md-12" style="border:1px solid #000;padding:40px">
+			<span style="color:blue"><label>Your Allocation</label></span>
+			 
+			 
+			 <div class="form-group">
+			      <label>Amount to Invest </label>
+			      
+			      <input type="text" class="form-control" ng-model="amountToInvest" >
+			      <button ng-click="calculateAllocation(stock)" class="btn btn-primary btn-xl"><span class="glyphicon glyphicon-hand-down"></span></button>
+			      
+			   </div>
+
+			<table class="table table-bordered table-striped" disabled>
+					<thead>
+                   
+					   <th>Symbol</th>
+					   <th>Name</th>
+					   <th>Exchange</th>
+					   <th>Sector</th>
+					   <th>Entry Price</th>
+					   <th>Quantity</th>
+					   <th>Weightage</th>
+					   <th>SubTotal</th>
+							   
+					   </thead>
+
+					<tbody>
+					    
+					    <tr ng-repeat="stock in folioDataExecute.folioStocks">
+					    <td>{{stock.stock.stockSymbol}}</td>
+					    <td>{{stock.stock.stockName}}</td>
+					    <td>{{stock.stock.exchangeName}}</td>
+					    <td>{{stock.stock.sector}}</td>
+					    <td>{{stock.marketPrice}}</td>
+					    <td>{{stock.quantity}}</td>
+					    <td>{{stock.weightage}}</td>
+					    <td>{{stock.subTotal}}</td>
+					   
+	
+					    </tr>
+
+	
+				</tbody>
+        
+				</table>
+   
+
+
+
+		</div>
+	</div>
+	<button class="btn btn-primary" ng-click="done()">Back</button>
+	<button class="btn btn-primary" ng-click="justFollowFolio()">Follow without Execution</button>
+	<button class="btn btn-primary" ng-click="executeFolio()">Execute Folio</button>

@@ -1,0 +1,88 @@
+<div class="contentarea userbasicDetails" id="rightColumn">
+    <div class="pageTitle">
+        <h1>Profile Basic Details</h1>
+    </div>
+    <div class="mainWrapper">
+        <form class="col-md-12" name="userForm">
+            <div class="row">
+                <div class="col-md-6">
+					 <div class="form-group">
+                        <label class="col-sm-3">User Name</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="userName" class="form-control" ng-model="userdata.userName" required disabled/>
+                            <p style="color: red" ng-show="userForm.userName.$invalid" class="help-block">*User Name is required.</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3">First Name</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" ng-model="userdata.firstName"  disabled/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3">Last Name</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" ng-model="userdata.lastName"disabled />
+                        </div>
+                    </div>
+                  
+                    <div class="form-group">
+                        <label class="col-sm-3">Age Group</label>
+                        <div class="col-sm-9">
+							<select ng-model="userdata.ageGroup.id" size="5" ng-options="ageGroup.id as ageGroup.name for ageGroup in ageGroupOptions" disabled></select>
+						</div>
+                    </div>
+                     <div class="form-group">
+                        <label class="col-sm-3">Gender</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" ng-model="userdata.gender" disabled/>
+                        </div>
+                    </div>
+
+                    <div class="form-group" ng-cloak>
+                        <label class="col-sm-3"></label>
+                        <div class="col-sm-9">
+                            <button type="submit" ng-show="!userdata.following" ng-click="followUser()" class="btn btn-save ng-cloak" ng-cloak>Follow</button>
+                            <button type="submit" ng-show="userdata.following" ng-click="unfollowUser()" class="btn btn-save ng-cloak" ng-cloak>UnFollow</button>
+                            <button type="button" class="btn btn-cancel" ng-hide="true">Cancel</button>
+                        </div>
+                    </div>
+
+                </div>
+                
+            </div>
+
+           
+              
+           
+        </form>
+    
+		 <div class="folioAccordion" ng-controller="folioAccordion">
+                <div class="folioAccordionTitle" ng-click="clicked($event)">
+                    <b>Folios created by {{userName}}</b>
+                    <i class="fa fa-angle-down"></i>
+                </div> 
+                
+                <div class="folioAccordionContent">
+						
+						<div>
+							<ul class="myFolioList">
+								<li ng-repeat="folio in myfolios">
+									
+										<a ng-href="#/folios/{{folio.folioId}}"><div class="folioImageMask"><img width="100" height="100" ng-src={{folio.image}}></div></a>
+									<div class="folioDetails">
+										<div class="pull-left">
+											<a ng-href="#/folios/{{folio.folioId}}"><h3 class="folioTitle">{{folio.name}}</h3></a>
+											<h1 class="folioPercentage"><i class="fa fa-arrow-up"></i>40%</h1>
+										</div>
+										
+									</div>
+								</li>
+								</ul>
+							</div>
+				</div>  
+				
+		</div>
+    
+    </div>
+</div>

@@ -1,0 +1,13 @@
+<h2 class="text-left">My Folios </h2>
+
+		Total: {{myfolios.length}}
+        <ul ng-repeat="folio in myfolios | limitTo: 5">
+        	
+		 <a ng-href="#/userhome/myfolios/details/{{folio.id}}"><img ng-src={{folio.image}}>{{folio.name}}</a><p>
+		 <!--<a ui-sref="userhome.myfolios.details">{{folio.name}}</a> -->
+	 
+
+		</ul>
+		<div ng-show="myfolios.length > 5"> 
+		<a href="#/userhome/myfolios/foliosearch">More</a> 
+		</div>

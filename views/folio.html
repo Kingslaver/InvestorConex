@@ -1,0 +1,24 @@
+<p>Folio.</p>
+
+<ul>
+        <ul ng-repeat="folio in myfolios">
+        	<label>Name:</label>{{folio.name}} <br/>
+		<label>Desription: {{folio.description}}<br/>
+		<label>TimeLine:{{folio.timeLine}}<br/>
+		<label>Risk:{{folio.riskAppetite}}<br/>
+		<label>TimeLine:{{folio.timeLine}}<br/>
+		<label>ExpectedReturn:{{folio.expectedReturn}}<br/>
+		<label>Keywords:{{folio.keywords}}<br/>
+		<br/>
+		<ul ng-repeat="stock in folio.folioStocks">
+			<label>Stock Details:</label><br/>	
+			<label>Symbol:{{stock.stock.stockSymbol}}</label><br/>
+			<label>Name:{{stock.stock.stockName}}</label><br/>
+			<label>Exchange:{{stock.stock.exchangeName}}</label><br/>
+			<label>Sector:{{stock.stock.sector}}</label><br/>
+			<label>Entry Price:{{stock.entryPrice}}</label><br/>
+			<label>Quantity:{{stock.quantity}}</label><br/>
+		<br/>
+		<br/>
+   		 </ul>
+   

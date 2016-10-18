@@ -1,0 +1,17 @@
+﻿<div class="row">
+   
+    <div class="form-group ">
+        <h3>Friends</h3>
+        <div class="col-mg-12">
+            <div class="addSelectedUser">
+                <input type="text" class="form-control" ng-model="query">
+                <button type="submit" ng-click="addSelectedUser()" class="btn btn-default"><i class="fa fa-plus"></i></button>
+            </div>
+          
+        </div>
+        <div class="top3">
+            <select class="form-control" ng-model="userId" size="10" ng-options="user.userId as user.firstName + ' '+ user.lastName for user in users | filter:query"></select>
+        </div>
+    </div>
+    
+</div>

@@ -1,0 +1,52 @@
+﻿<div class="contentarea messageCenter" id="rightColumn">
+    <div class="pageTitle">
+        <h1>Message Center{{breadcrumbs}}</h1>
+    </div>
+    <div class="tabbable tabs-below messageCenter">
+        <!-- My Folio view-->
+        <div class="col-md-12">
+            <div class="row">
+                <a ui-sref=".messageCompose" class="btn btn-primary"><i class="fa fa-paper-plane"></i><span>Compose</span></a>
+                <a ui-sref=".messages" class="btn btn-primary"><i class="fa fa-inbox"></i><span>Inbox</span></a>
+            </div>
+            
+        </div>
+        <!-- Trending folios-->
+        <div class="col-md-12" style="padding:0;">
+            <div ui-view></div>
+        </div>
+
+
+    </div>
+</div>
+
+<!--<div class="container">
+    <div class="row">
+       
+        <div class="col-sm-3">
+            <div>
+                <a ui-sref=".messageCompose" class="btn btn-default"> compose</a>
+
+            </div>
+            <div>
+                <a ui-sref=".messages" class="btn btn-default">
+                    Inbox
+                </a>
+                <div ui-view="myFriendSearch"></div>
+            </div>
+        </div>
+       
+        <div class="col-sm-9">
+            <div ui-view></div>
+        </div>
+
+
+    </div>
+
+
+
+
+
+</div>-->
+
+

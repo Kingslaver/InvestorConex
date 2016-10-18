@@ -1,0 +1,63 @@
+<div class="contentarea userbasicDetails" id="rightColumn">
+    <div class="pageTitle">
+        <h1>Profile Basic Details</h1>
+    </div>
+    <div class="mainWrapper">
+        <form class="tabbable" name="userForm">
+            <div class="col-md-12">
+                <div class="col-md-6">
+					 <div class="form-group">
+                        <label class="col-sm-3">User Name</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="userName" class="form-control" ng-model="userdata.userName" required/>
+                            <p style="color: red" ng-show="userForm.userName.$invalid" class="help-block">*User Name is required.</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3">First Name</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" ng-model="userdata.firstName" />
+                        </div>
+                    </div>
+                     <div class="form-group">
+                        <label class="col-sm-3">Last Name</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" ng-model="userdata.lastName" />
+                        </div>
+                    </div>
+                     <div class="form-group">
+                        <label class="col-sm-3">Gender</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" ng-model="userdata.gender" disabled/>
+                        </div>
+                    </div>
+                   
+                    <div class="form-group">
+                        <label class="col-sm-3">Email</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" ng-model="userdata.emailAddress" disabled/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3">Age Group</label>
+                        <div class="col-sm-9">
+							<select ng-model="userdata.ageGroup.id" size="5" ng-options="ageGroup.id as ageGroup.name for ageGroup in ageGroupOptions"></select>
+						</div>
+                    </div>
+					<div class="form-group">
+						<label class="col-sm-3"></label>
+						<div class="col-sm-9">
+							<button type="submit" ng-click="updateUser()" class="btn btn-save">Save</button>
+							<button type="button" class="btn btn-cancel" ng-hide="true">Cancel</button>
+						</div>
+					</div>
+                </div>
+             
+            </div>
+
+          
+           
+        </form>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+<div class="contentarea" id="rightColumn">
+	 
+	  <div class="mainWrapper folioSearchWrapper">
+				<div class="contentSpacing">
+                            <h6>User Name</h6>
+                            <angucomplete id="ex1"
+							  placeholder="Search username"
+							  pause="100"
+							  selectedobject="userName"
+							  searchfields="userName"
+							  titlefield="userName"
+							  url="http://investorconex.com/api/users/find/"
+							  datafield="userlist"
+							  minlength="1"
+							  inputclass="form-control form-control-small"/>
+                 </div>
+                 
+                 <div class="button-group">
+					<button type="submit" ng-click="fetchUserDetails()" class="btn btn-primary">Fetch User Details</button><br/>
+				</div>
+				
+				  <div id="userdetails">
+					   FirstName:{{userdata.firstName}}<br/>
+					   LastName:{{userdata.lastName}}<br/>
+					   Gender:{{userdata.gender}}<br/>
+					   UserName:{{userdata.userName}}<br/>
+					   Email:{{userdata.emailAddress}}<br/>
+					   User Enabled<input type="checkbox" name="enabled" ng-model="userdata.enabled" />
+					   
+				 </div>
+       
+       </div>
+       
+     
+       
+       <div class="button-group">
+			   <button type="submit" ng-click="usersave()" class="btn btn-primary">Save</button>
+		</div>
+      
+      	
+</div>
+
+	
+	
+	
+
+	
+
+		
+
+        
+
+
+       
+        
+        

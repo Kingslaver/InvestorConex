@@ -1,0 +1,571 @@
+<div class="contentarea" id="rightColumn">
+    <div class="pageTitle">
+        <h1>{{breadcrumbs}}</h1>
+        <div class="pull-right">
+        <button type="submit" ng-show="showFollowFolioVirtualButton()" ng-click="followFolioVirtual(folioForm)" class="btn btn-primary" title="Follow Virtually (Without Trades)"><i class="fa fa-rocket"></i></button>
+        <!--<button type="submit" ng-show="mode=='Detail'" ng-click="followFolioReal(folioForm)" class="btn btn-primary" title="Follow and Execute trades"><i class="fa fa-rocket"></i></button>
+        <button type="submit" ng-show="mode=='Detail'" ng-click="followCustomizeFolioReal(folioForm)" class="btn btn-primary" title="Customize and Execute trades"><i class="fa fa-cog"></i></button>
+        !-->
+        <button type="submit" ng-show="showEditButton()" ng-click="editClickHandler(folioForm)" class="btn btn-primary" title="Edit"><i class="fa fa-pencil"></i></button>
+        </div>
+        
+    </div>
+    <div class="mainWrapper createFolio tabsContainer">
+        <div class="tabbable tabs-below">
+            <ul class="nav nav-pills">
+                <li ng-class="{active: $scope.selectedTab == 1 || $scope.selectedTab == null}">
+                    <a ng-click="$scope.selectedTab = 1;">Basic Details</a>
+                </li>
+                <li ng-class="{active: $scope.selectedTab == 2}" ng-show="showSelectStocksSection()">
+                    <a ng-click="$scope.selectedTab = 2;">Select Stocks</a>
+                </li>
+                <li ng-class="{active: $scope.selectedTab == 3}">
+                    <a ng-click="$scope.selectedTab = 3;">Weightage</a>
+                </li>
+                <li ng-class="{active: $scope.selectedTab == 5}" ng-show="showExecuteTradesSection()">
+                    <a ng-click="$scope.selectedTab = 5;">Trades</a>
+                </li>
+                <li ng-class="{active: $scope.selectedTab == 4}" ng-show="showBlogsSection()">
+                    <a ng-click="$scope.selectedTab = 4;$scope.showCreateForm=false;">Blogs</a>
+                </li>
+
+            </ul>
+
+            <!--Basic details tab-->
+
+            <div class="tab-content" ng-show="$scope.selectedTab == 1 || $scope.selectedTab == null">
+                <form class="col-md-12" name="folioForm" role="form"  method="POST" enctype="multipart/form-data" novalidate>
+                    <div class="createFolioButtons">
+                        <div class="button-group" ng-hide="true">
+                            <button type="submit" ng-click="$scope.selectedTab = 2;" class="btn btn-save" title="Next"><i class="fa fa-forward"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+    
+                            <div class="form-group required">
+                                <label class="col-sm-4 control-label">Folio Name</label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="folioname" class="form-control" ng-model="foliodata.name" ng-disabled="{{mode=='Edit'}}" required  isavailable/>
+                                    <p style="color: red" ng-show="folioForm.folioname.$invalid &&  submitted" class="help-block">*Name is required.</p>
+                                    <p style="color: red" ng-show="folioForm.folioname.$error.isavailable" class="help-block">*Name is not available. Please try different one.</p>
+
+                                </div>
+                            </div>
+                            <div class="form-group required">
+                                <label class="col-sm-4 control-label" >Description</label>
+                                <div class="col-sm-8">
+                                    <textarea name="description" class="form-control" ng-model="foliodata.description" maxlength="250" style="height:100px;" ng-disabled="{{mode=='Detail'}}" required />
+                                    <p style="color: red" ng-show="folioForm.description.$invalid &&  submitted" class="help-block">*Description is required.</p>
+                                </div>
+                            </div>
+
+                            <div class="form-group" ng-hide="mode=='FollowFolio'">
+                                <label class="col-sm-4">Visibility</label>
+                                <div class="col-sm-8">
+                                    <select name="visibility" ng-model="foliodata.visibility" ng-options="visibility.Id as visibility.Setting for visibility in visibilityOptions" ng-disabled="{{mode=='Detail'}}" required>
+                                        <option value="">Please choose a visibility</option>
+                                    </select>
+                                    <p style="color: red" ng-show="folioForm.visibility.$invalid &&  submitted" class="help-block">*Visibility is required.</p>
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <div ng-show="foliodata.visibility == 'Mycircle'">
+                                    <div ng-show="mycircleOptions.length >0">
+                                        <label class="col-sm-4">My Circle</label>
+                                        <div class="col-sm-8">
+                                            <select multiple="true" ng-model="foliodata.mycircle" ng-options="mycircle.myCircleId as mycircle.name for mycircle in mycircleOptions" ng-disabled="{{mode=='Detail'}}"></select>
+                                        </div>
+                                    </div>
+                                    <p style="color: red" ng-show="mycircleOptions.length == 0" class="help-block">*There is no Circle has been created yet, To create a new circle go to profile and use create mycircle option.</p>
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group" ng-hide="mode=='FollowFolio'">
+                                <label class="col-sm-4">Risk Appetite</label>
+                                <div class="col-sm-8">
+									 <div>
+                                            <select  size="4" name=riskAppetite" ng-model="foliodata.riskAppetite.id" ng-options="riskAppetite.id as riskAppetite.name for riskAppetite in riskAppetiteOptions" ng-disabled="{{mode=='Detail'}}">
+                                            <option value="">Select One</option>
+                                            </select>
+                                     </div>
+                                     <p style="color: red" ng-show="folioForm.riskAppetite.$invalid && submitted" class="help-block">*Risk Appetite is required.</p>
+                                </div>
+                            </div>
+                            
+                             <div class="form-group" ng-hide="true">
+                                <label class="col-sm-4">Virtual Folio (Yes / No)</label>
+                                <div class="col-sm-8" >
+                                    <input type="checkbox" ng-model="foliodata.isVirtualFolio" disabled/>
+
+                                </div>
+                            </div>
+                  
+                            
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <!--<div class="form-group" ng-hide="mode=='FollowFolio'">
+                                <label class="col-sm-4">Investment Term</label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="timeLine" class="form-control" ng-model="foliodata.timeLine" required>
+                                    <select ng-model="foliodata.timeLineDuration" size="5" ng-options="timeLine.Id as timeLine.TimeLine for timeLine in timeLineOptions" ng-disabled="mode=='Detail'"></select>
+                                    <p style="color: red" ng-show="folioForm.timeLine.$invalid &&  submitted" class="help-block">*TimeLine is required.</p>
+                                </div>
+                            </div>-->
+                            
+                            <div class="form-group" ng-hide="mode=='FollowFolio'">
+                                <label class="col-sm-4">Investment Time Line</label>
+                                <div class="col-sm-8">
+                                    <select name="investmentTimeline" ng-model="foliodata.investmentTerm" ng-options="investmenttimeline.Id as investmenttimeline.Value for investmenttimeline in InvestmentTimelineOptions" ng-disabled="{{mode=='Detail'}}" required>
+                                        <option value="">Please choose a Time Line</option>
+                                    </select>
+                                    <p style="color: red" ng-show="folioForm.investmentTimeline.$invalid &&  submitted" class="help-block">*Investment Time Line is required.</p>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group" ng-hide="mode=='FollowFolio'">
+								
+                                <label class="col-sm-4">Expected Return</label>
+                                <div class="col-sm-5">
+									<slider floor="0" ceiling="1000" step="1" precision="0" ng-model="foliodata.expectedReturn" ng-disabled="{{mode=='Detail'}}" ></slider>
+								</div>
+								 <div class="col-sm-3">
+                                    <input type="text" name="expectedReturn" class="form-control" ng-model="foliodata.expectedReturn" ng-disabled="{{mode=='Detail'}}" required>
+                                    <p style="color: red" ng-show="folioForm.expectedReturn.$invalid &&  submitted" class="help-block">*Expeceted Return is required.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group" ng-hide="mode=='FollowFolio'">
+                                <label class="col-sm-4">Min. Investment</label>
+                                <div class="col-sm-8">
+                                    <select name="minInvestment" ng-model="foliodata.minInvestment" ng-options="minInvestment.Id as minInvestment.Value for minInvestment in InvestmentAmountOptions" ng-disabled="{{mode=='Detail'}}" required>
+                                        <option value="">Please choose a Min. Investment</option>
+                                    </select>
+                                    <p style="color: red" ng-show="folioForm.minInvestment.$invalid &&  submitted" class="help-block">*Min. Investment is required.</p>
+                                </div>
+                            </div>
+
+                            
+                            
+                            <div class="form-group" ng-hide="mode=='FollowFolio'">
+                                <label class="col-sm-4">Investment Percentage</label>
+                                <div class="col-sm-5">
+									<slider floor="0" ceiling="100" step="1" precision="0" ng-model="foliodata.investmentPct" ng-disabled="{{mode=='Detail'}}"></slider>
+								</div>
+								 <div class="col-sm-3">
+                                    <input type="text" name="investmentPct" class="form-control" ng-model="foliodata.investmentPct" ng-disabled="{{mode=='Detail'}}" required>
+                                    <p style="color: red" ng-show="folioForm.investmentPct.$invalid &&  submitted" class="help-block">*Investment Percentage is required.</p>
+                                </div>
+                            </div>
+                            
+                                                       
+                           <div class="form-group">
+							<label class="col-sm-4">Folio Image</label> 
+							<div class="col-sm-8">
+								 <a ng-href="{{foliodata.image}}"><img width="100" height="100" ng-src={{foliodata.image}}></a>
+								 <input type="file" file-model="file" />
+							</div>
+							</div>
+                            
+                            
+                            
+                        </div>
+                    </div>
+                    <div class="button-group buttonWrapperBottom">
+						<button type="submit" ng-show="showSaveFolioButton()" ng-click="fillForm()" class="btn btn-primary">Auto populate form</button>
+                        <button type="submit" ng-show="showSaveFolioButton()" ng-click="saveFolio(folioForm)" class="btn btn-primary">Save</button>
+                        <button type="button" ng-show="showSaveFollowFolioButton()" ng-click="saveFollowFolio(folioForm)" class="btn btn-primary">Follow</button>
+                        <button type="submit" ng-show="showSaveAndExecuteButton()" ng-click="displayExecuteTradesTab(folioForm);$scope.selectedTab = 5;" class="btn btn-primary">Save And Execute</button>
+                    </div>
+                </form>
+
+
+            </div>
+
+            <!--Basic details tab-->
+            <!--Stocks tab-->
+
+            <div class="tab-content" ng-show="$scope.selectedTab == 2 && mode!='Detail' ">
+                <form class="col-md-12" name="folioStocksForm" role="form" novalidate>
+                    <div class="col-md-12 createFolioButtons">
+                        <div class="button-group">
+                            <button type="submit" ng-click="$scope.selectedTab = 3;" class="btn btn-save" title="Next"><i class="fa fa-forward"></i></button>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div id="stockselection" class="col-md-5">
+                            <div class="form-group stocksWrapper">
+                                <label class="col-sm-4">Stocks</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" ng-model="query" placeholder="Type a stock symbol/name here">
+                                    <button type="submit" ng-click="addSelectedStock()" class="btn btn-save"><i class="fa fa-plus"></i></button>
+
+                                     <select ng-model="stocksMaster" ng-dblclick="addSelectedStock()" size="10" ng-options="stock.stockId as stock.stockName + '(' + stock.exchangeName + ')' for stock in stocks | filter:query">
+                                    <option value="">Select One</option>
+                                    </select>
+                                </div>
+
+                            </div>
+
+                            
+
+                        </div>
+
+                        <div id="selectedstocks" class="customDataTableWrapper col-md-5">
+
+                            <label>Selected Stocks</label>
+
+                            <table id="createFolioTable" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Symbol</th>
+                                        <th align="center">Remove</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="folioStock in foliodata.folioStocks">
+                                        <td>{{folioStock.stock.stockName}}</td>
+                                        <td>{{folioStock.stock.stockSymbol}}</td>
+                                        <td>
+                                            <button ng-click="removeStock(folioStock,false)" class="btnTransparent btnRemove">
+                                                <i class="fa fa-times"></i>
+
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+
+                        </div>
+                    </div>
+
+                    <div class="button-group buttonWrapperBottom">
+                      	<button type="submit" ng-show="showSaveFolioButton()" ng-click="saveFolio(folioStocksForm)" class="btn btn-primary">Save</button>
+                        <button type="submit" ng-show="showSaveFollowFolioButton()" ng-click="saveFollowFolio(folioStocksForm)" class="btn btn-primary">Follow</button>
+                        <button type="submit" ng-show="showSaveAndExecuteButton()" ng-click="displayExecuteTradesTab(folioStocksForm);$scope.selectedTab = 5;" class="btn btn-primary">Save And Execute</button>
+                    </div>
+                </form>
+
+
+            </div>
+
+            <!--Stocks tab-->
+            <!--Weightage tab-->
+
+            <div class="tab-content folioWeightageForm" ng-show="$scope.selectedTab == 3">
+                <form class="col-md-12" name="folioWeightageForm" role="form" novalidate>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="col-sm-2">Investment Amount</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="investmentAmount" class="form-control" ng-model="foliodata.investmentAmount" ng-change="investmentAmountChanged()" ng-disabled="mode=='Detail'" required>
+                                    <p style="color: red" ng-show="folioWeightageForm.investmentAmount.$invalid " class="help-block">*Investment Amount is required.</p>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2">Folio Value</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="currentFolioValue" class="form-control" ng-model="foliodata.cost" ng-disabled="mode=='Detail'" readonly>
+                                    <div ng-show="foliodata.cost >foliodata.investmentAmount" class="help-block">
+                                        <span style="color: red">*Folio Value is higher than intented investment amount.</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                             <div class="form-group" ng-hide="true">>
+                                <label class="col-sm-2">Total Weightage</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="totalWeightage" class="form-control" ng-model="foliodata.weightage" ng-disabled="mode=='Detail'" readonly>
+                                    <div ng-show="foliodata.weightage >100" class="help-block">
+                                        <span style="color: red">*Total weightage cannot be more than 100.</span>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div ng-show="mode=='Detail'">
+                                <div class="form-group">
+                                    <label class="col-sm-2">Latest Folio Value</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" name="currentFolioValue" class="form-control" ng-model="foliodata.currentFolioValue" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                        
+						
+						<div class="form-group">
+							<label class="col-sm-2">Selected Stocks</label>
+							 <div class="col-sm-9">
+							  <table class="table table-bordered table-striped" style="margin:0;">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Entry Price</th>
+                                            <th>Current Price</th>
+                                            <th>Target Price</th>
+                                            <th>Weightage</th>
+                                            <th>Quantity</th>
+                                            <th ng-show="mode=='Detail'">Date</th>
+                                            <th ng-show="mode=='Detail'">Profit</th>
+                                            <th ng-show="mode=='Detail'">Profit Pct</th>
+                                            <th>Sub Total</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="folioStock in foliodata.folioStocks">
+                                            <td><span class="remove-{{folioStock.remove}}"><a class="remove-{{folioStock.remove}}" ng-href="#/folios/{{foliodata.folioId}}/returns/{{folioStock.stock.stockId}}">{{folioStock.stock.stockName}}</a></span></td>
+                                            <td>{{folioStock.entryPrice}}</td>
+                                            <td>{{folioStock.marketPrice}}
+                                                <button ng-click="refreshStockPrice(folioStock)" class="btn btn-primary btn-xs">
+                                                    <span class="fa fa-refresh"></span>
+                                                </button>
+                                            </td>
+                                            <td><input type="text" name="value" class="form-control" ng-model="folioStock.targetPrice"></td>
+                                            <td>
+                                                <div class="weightageColumn">
+                                                    <!--<button ng-click="reduceWeightage(folioStock)" class="btn btn-primary btn-xs">
+                                                        <span class="glyphicon glyphicon-minus"></span>
+                                                    </button>-->
+                                                    <input type="text" name="value" class="form-control" ng-model="folioStock.weightage" ng-change="changeWeightage(folioStock)" ng-disabled="mode=='Detail'">
+                                                    <!--<button ng-click="increaseWeightage(stock)" class="btn btn-primary btn-xs">
+                                                        <span class="glyphicon glyphicon-plus"></span>
+                                                    </button>-->
+                                                    <input type="range" ng-model="folioStock.weightage" ng-change="changeWeightage(folioStock)" min="0" max="100" step="1" style="width: 140px" class="ng-pristine ng-valid weightageRange" ng-disabled="mode=='Detail'">
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <input type="text" name="value" class="form-control quantityTextbox" ng-model="folioStock.quantity" ng-change="changeQuantity(folioStock)" ng-disabled="mode=='Detail'">
+                                            </td>
+                                            <td ng-show="mode=='Detail'">{{folioStock.createdDate | date:'yyyy-MM-dd'}}</td>
+                                            <td ng-show="mode=='Detail'">{{folioStock.profit | number:2}}</td>
+                                            <td ng-show="mode=='Detail'">{{folioStock.profitPct | number:2}}</td>
+                                            <td>{{folioStock.subtotal | number:2}}</td>
+                                            
+                                            <td ng-show="mode=='Edit'">
+                                                <button ng-click="removeStock(folioStock,true)" class="btn btn-primary btn-xs btnRemove">
+                                                    <span class="fa fa-times"></span>
+                                                </button>
+                                            </td>
+                                    </tbody>
+                                </table>
+							 </div>
+						</div>
+						</div>
+                    </div>
+
+
+                   <!-- <div class="row creatFolio">
+					 <div class="col-md-6">
+						
+					</div>
+					<div class="col-md-6">
+						 						 
+						 </div>
+                    </div>-->
+					
+
+                    <div class="button-group buttonWrapperBottom">
+                        <button type="submit" ng-show="showSaveFolioButton()" ng-click="saveFolio(folioWeightageForm)" class="btn btn-primary">Save</button>
+                        <button type="submit" ng-show="showSaveFollowFolioButton()" ng-click="saveFollowFolio(folioWeightageForm)" class="btn btn-primary">Follow</button>
+                        <button type="submit" ng-show="showSaveAndExecuteButton()" ng-click="displayExecuteTradesTab(folioWeightageForm);$scope.selectedTab = 5;" class="btn btn-primary">Save And Execute</button>
+                    </div>
+                </form>
+            </div>
+
+
+
+
+
+            <!--Weightage tab-->
+            <!--Blogs tab-->
+
+            <div class="tab-content " ng-show="$scope.selectedTab == 4 ">
+
+                <div ng-show="(!isBlogPost)">
+                   
+                    <form class="col-md-12" name="folioBlogsForm" role="form" novalidate>
+                        <div class="form-group">
+        
+                            <!--start: show Blog posts-->
+                            <div class="form-group" ng-show="foliodata.blogList && foliodata.blogList.length > 0 && (!showCreateForm) &&(!showCreateBlogPost) ">
+								
+                                <h1 class="text-center">{{foliodata.blogList[0].blogName}}</h1>
+                                <ul>
+                                    <li ng-repeat=" bp in foliodata.blogList[0].blogPosts">
+										<div class="col-md-4">{{bp.user.userName}}</div>
+										<div class="col-md-8">{{bp.postTitle}}</div>
+									    <div> On {{bp.createdDate | date:'yyyy-MM-dd HH:mm:ss'}}</div>
+									    <div data-ng-bind-html="bp.postContent"></div>
+                                   </li>
+                                </ul>
+                                <button type="button" ng-click="showCreateBlogPost = true;submitted = false; " class="btn btn-primary">Create Blog Post</button>
+                            </div>
+                            <!--end: show Blog posts-->
+                            <button type="button" ng-show="!(foliodata.blogList && foliodata.blogList.length > 0) && !(showCreateForm) && (foliodata.editable) && (mode == 'Edit')" ng-click="showCreateForm = true;  submitted = false; " class="btn btn-primary">Create Blog</button>
+                        </div>
+                        <!--start: create Blogs-->
+                        <div id="createNewBlog" ng-show="showCreateForm" class="col-md-6">
+                            <div class="form-group">
+                                <label>Blog Title</label>
+                                <br />
+                                <input type="text" name="blogTitle" class="form-control" ng-model="newblog.blogName" required>
+                                <p style="color: red" ng-show="folioBlogsForm.blogTitle.$invalid && submitted" class="help-block">*Title is required.</p>
+                            </div>
+                            <div class="form-group">
+                                <label>Blog Description</label>
+                                <br />
+                                <input type="text" name="blogDescription" class="form-control" ng-model="newblog.blogDescription" required>
+                                <p style="color: red" ng-show="folioBlogsForm.blogDescription.$invalid && submitted" class="help-block">*Description is required.</p>
+                            </div>
+
+                            <button type="submit" ng-click="submitted = true; saveBlog(folioBlogsForm)" ng-disabled="folioBlogsForm.blogTitle.$invalid || folioBlogsForm.blogDescription.$invalid" class="btn btn-primary">Save</button>
+
+                        </div>
+                        <!--end: create Blogs-->
+                    </form>
+
+
+                    <!--start: show create Blog posts form-->
+
+                    <div id="createBlogPost" ng-show="showCreateBlogPost">
+                        <form name="folioBlogPostForm" role="form" novalidate>
+                            <div>
+                                <label>Blog Post Title</label>
+                                <br />
+                                <input type="text" name="blogpostTitle" class="form-control" ng-model="newblogpost.postTitle" required>
+                                <p style="color: red" ng-show="folioBlogPostForm.blogpostTitle.$invalid && submitted" class="help-block">*Title is required.</p>
+                            </div>
+                            <div style="min-height:100px; max-width:900px!important">
+                                <label>Blog Post Content</label>
+                                <br />
+                                <div>
+                                    <div text-angular ng-model="newblogpost.postContent" name="newblogpost-editor" ta-text-editor-class="border-around container" ta-html-editor-class="border-around"></div>
+
+                                </div>
+                                <br>
+
+                            </div>
+                            <input type="submit" ng-click=" submitted = true; saveBlogPost(folioBlogPostForm);" value="Save Post" class="btn btn-primary" />
+                        </form>
+
+                    </div>
+
+
+                    <!--end: show create Blog posts form-->
+                    <!--start: show create Blog posts form-->
+                    <!--end: show create Blog posts form-->
+
+                     <!--<div class="button-group">
+                        <button type="submit" ng-show="showSaveFolioButton()" ng-click="saveFolio(folioBlogsForm)" class="btn btn-primary">Save</button>
+                        <button type="submit" ng-show="showSaveFollowFolioButton()" ng-click="saveFollowFolio(folioBlogsForm)" class="btn btn-primary">Follow</button>
+                        <button type="submit" ng-show="showSaveAndExecuteButton()" ng-click="displayExecuteTradesTab(folioBlogsForm);$scope.selectedTab = 5;" class="btn btn-primary">Save And Execute</button>
+                    </div>-->
+                </div>
+
+               
+            </div>
+
+            <!--Blogs tab-->
+            <!--ExecuteTrades tab-->
+
+
+            <div class="tab-content " ng-show="$scope.selectedTab == 5">
+
+                <form class="col-md-12" name="folioExecuteTradesForm" role="form" novalidate>
+
+                    <div class="col-md-10">
+
+
+                        <div class="form-group">
+                            <label>Value</label>
+                            <input type="text" name="currentFolioValue" class="form-control" ng-model="foliodata.cost" ng-disabled="mode=='Detail'" readonly>
+                            <div ng-show="foliodata.cost >foliodata.investmentAmount" class="help-block">
+                                <span style="color: red">*Folio Value is higher than intented investment amount.</span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>Selected Stocks</label>
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                <th>Name</th>
+                                <th>Limit Price</th>
+                                <th>Current Price</th>
+                                <th ng-show="mode=='Detail'">Profit</th>
+                                <th ng-show="mode=='Detail'">Profit Pct</th>
+                                <th>Quantity</th>
+                                <th>Sub Total</th>
+                                <th>Refresh</th>
+                                <th></th>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="folioStock in foliodata.folioStocks">
+                                        <td>{{folioStock.stock.stockName}}</td>
+                                        <td>
+                                            <input type="text" name="value" class="form-control" ng-model="folioStock.entryPrice" ng-disabled="mode=='Detail'" ng-change="changeQuantity(folioStock)">
+                                        </td>
+                                        <td>{{folioStock.marketPrice}}</td>
+                                        <td ng-show="mode=='Detail'">{{folioStock.profit | number:2}}</td>
+                                        <td ng-show="mode=='Detail'">{{folioStock.profitPct | number:2}}</td>
+                                        <td>
+                                            <input type="text" name="value" class="form-control" ng-model="folioStock.quantity" ng-disabled="mode=='Detail'" ng-change="changeQuantity(folioStock)">
+                                        </td>
+                                        <td>{{folioStock.subtotal | number:2}}</td>
+                                        <td>
+                                            <button ng-click="refreshStockPrice(folioStock)" class="btn btn-primary btn-xs">
+                                                <span class="glyphicon glyphicon-refresh"></span>
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button ng-click="removeStock(folioStock)" ng-hide="mode=='Detail'" class="btn btn-primary btn-xs">
+                                                <span class="glyphicon glyphicon-remove"></span>
+                                            </button>
+                                        </td>
+                                        </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+
+                        <div class="form-group">
+                            <button type="submit" ng-click="foliodata.tradeExecution=1;saveFolio(folioForm)" ng-hide="mode=='Detail'" class="btn btn-primary">Save</button>
+                        </div>
+
+
+                    </div>
+
+                    <div class="button-group">
+                        <button type="submit" ng-show="showSaveFolioButton()" ng-click="saveFolio(folioExecuteTradesForm)" class="btn btn-primary">Save</button>
+                        <button type="submit" ng-show="showSaveFollowFolioButton()" ng-click="saveFollowFolio(folioExecuteTradesForm)" class="btn btn-primary">Follow</button>
+                        <button type="submit" ng-show="showSaveAndExecuteButton()" ng-click="displayExecuteTradesTab(folioExecuteTradesForm);$scope.selectedTab = 5;" class="btn btn-primary">Save And Execute</button>
+                    </div>
+                </form>
+
+            </div>
+
+            <!--ExecuceTrades tab-->
+
+
+
+        </div>
+    </div>
+</div>
+

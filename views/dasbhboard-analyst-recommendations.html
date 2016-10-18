@@ -1,0 +1,41 @@
+<div class="panelHeader">Analyst Recommendations</div>
+ <div class="panelBody">
+						
+						 <table id="recommendationsTable" class="display dashboardTable dataTable " width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                                                                   
+                                        </tr>
+                                    </thead>
+                                    
+                                    <tbody>
+                                        <tr ng-repeat="recommendation in analystTopRecommendations | limitTo: 12 ">
+                                            <td>{{recommendation.advisor.name}}</td>
+                                            <td>{{recommendation.dateRecommended | date:'dd-MMM-yyyy HH:mm:ss' }}</td>
+                                            <td>{{recommendation.stock.stockName}}</td>
+                                            
+                                        </tr>
+                                        
+                                    </tbody>
+                           </table>
+                            
+                
+		
+
+	</div>
+	<div ng-show="analystTopRecommendations.length > 12"> 
+			<div class="row buttonWrapper"><a class="btn btn-primary btn-sm pull-right" ui-sref="searchanalystrecommendations">More</a></div>
+	</div>
+	
+
+		
+
+        
+
+
+       
+        
+        

@@ -1,0 +1,35 @@
+<div class="contentarea myTrades" id="rightColumn">
+    <div class="pageTitle">
+        <h1>My Trades</h1>
+    </div>
+
+ 
+
+       				  <div class="col-md-10">
+
+						<table class="table table-bordered table-striped" disabled>
+								<thead>
+								<th>Symbol</th>
+								<th>EntryPrice</th>
+								<th>Quantity</th>
+								<th>Date</th>
+								<th>Folio</th>
+								</thead>
+
+								<tbody>
+									
+									<tr ng-repeat="trade in trades">
+									<td>{{trade.stock.stockName}}</td>
+									<td>{{trade.entryPrice}}</td>
+									<td>{{trade.quantity}}</td>
+									<td>{{trade.executionDate | date:'yyyy-MM-dd HH:mm:ss Z'}}</td>
+									<td> <a ng-href="#/userhome/myfolios/details/{{trade.folio.id}}">{{trade.folio.name}}</a></td>
+									</tr>
+
+								</tbody>
+					
+						</table>
+					</div>
+</div>			
+   
+			

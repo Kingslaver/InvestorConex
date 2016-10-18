@@ -1,0 +1,56 @@
+	<div class="row">
+
+						
+		 <div class="col-md-12" style="padding:40px">
+			<span style="color:blue"><label>Your Allocation</label></span>
+			 
+			 
+			 <div class="form-group">
+			      <label>Amount to Invest </label>
+			      
+			      <input type="text" class="form-control" ng-model="folioDataExecute.value" disabled>
+			      
+			   </div>
+
+			<table class="table table-bordered table-striped" disabled>
+					<thead>
+                   
+					   <th>Symbol</th>
+					   <th>Name</th>
+					   <th>Exchange</th>
+					   <th>Sector</th>
+					   <th>Entry Price</th>
+					   <th>Quantity</th>
+					   <th>Weightage</th>
+					   <th>SubTotal</th>
+							   
+					   </thead>
+
+					<tbody>
+					    
+					    <tr ng-repeat="stock in folioDataExecute.folioStocks">
+					    <td>{{stock.stock.stockSymbol}}</td>
+					    <td>{{stock.stock.stockName}}</td>
+					    <td>{{stock.stock.exchangeName}}</td>
+					    <td>{{stock.stock.sector}}</td>
+					    <td>{{stock.marketPrice}}</td>
+					    <td>{{stock.quantity}}</td>
+					    <td>{{stock.weightage}}</td>
+					    <td>{{stock.subTotal}}</td>
+					   
+	
+					    </tr>
+
+	
+				</tbody>
+        
+				</table>
+   
+
+
+
+		</div>
+	</div>
+	<button class="btn" ng-click="done()">Back</button>
+	<button class="btn" ng-click="submitTrades()">Place Trades</button>
+	

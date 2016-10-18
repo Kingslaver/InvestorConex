@@ -1,0 +1,187 @@
+<p>Folio Details </p>
+
+<div class="tabbable tabs-below">
+    <ul class="nav nav-pills">
+        <li ng-class="{active: $scope.selectedTab == 1 || $scope.selectedTab == null}">
+            <a ng-click="$scope.selectedTab = 1;">Basic Details</a>
+        </li>
+        <li ng-class="{active: $scope.selectedTab == 2}">
+            <a ng-click="$scope.selectedTab = 2;">Select Stocks</a>
+        </li>
+        <li ng-class="{active: $scope.selectedTab == 3}">
+            <a ng-click="$scope.selectedTab = 3;">Weightage</a>
+        </li>
+    </ul>
+    <form name="folioForm" role="form" novalidate>
+        <!--Basic details tab-->
+        <div class="col-md-6 tab-content" ng-show="$scope.selectedTab == 1 || $scope.selectedTab == null">
+            <div class="form-group">
+                <label>Folio Name</label>
+                <input type="text" name="folioname" class="form-control" ng-model="foliodata.folioname" required>
+                    <p ng-show="folioForm.folioname.$invalid &&  submitted"  class="help-block">*Name is required.</p>z
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <input type="text" name="description" class="form-control" ng-model="foliodata.description" required>
+                        <p ng-show="folioForm.description.$invalid &&  submitted"  class="help-block">*Description is required.</p>
+                    </div>
+                    
+                    <div class="form-group" style="display:none">
+					<label>Image</label>
+                    <input type="file" nv-file-select uploader="uploader"/><br/>
+					<ul>
+						<li ng-repeat="item in uploader.queue">
+							Name: <span ng-bind="item.file.name"></span><br/>
+							 <div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
+							 <div ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</div>
+							
+						</li>
+					</ul>
+					</div>
+					
+					<div class="form-group">
+                        <label>Visibility</label>
+                        <br/>
+                            <select ng-model="foliodata.visibility" size="5" ng-options="visibility.Id as visibility.Setting for visibility in visibilityOptions"></select>
+                            <p ng-show="folioForm.timvisibilityeLine.$invalid &&  submitted"  class="help-block">*Visibility is required.</p>
+                        </div>
+                        
+					
+                    <div class="form-group">
+                        <label>Investment Time Line</label>
+                        <br/>
+                        <input type="text" name="timeLine" class="form-control" ng-model="foliodata.timeLine" required>
+                            <select ng-model="foliodata.timeLineDuration" size="5" ng-options="timeLine.Id as timeLine.TimeLine for timeLine in timeLineOptions"></select>
+                            <p ng-show="folioForm.timeLine.$invalid &&  submitted"  class="help-block">*TimeLine is required.</p>
+                        </div>
+                        <div class="form-group">
+                            <label>Risk Appetite</label>
+                            <input type="text" name="riskAppetite" class="form-control" ng-model="foliodata.riskAppetite" required>
+                                <p ng-show="folioForm.riskAppetite.$invalid &&  submitted"  class="help-block">*Risk Appetite is required.</p>
+                            </div>
+                            <div class="form-group">
+                                <label>Expected Return</label>
+                                <input type="text" name="expectedReturn" class="form-control" ng-model="foliodata.expectedReturn" required>
+                                    <p ng-show="folioForm.expectedReturn.$invalid &&  submitted"  class="help-block">*Expeceted Return is required.</p>
+                                </div>
+                                <div class="form-group">
+                                    <label>Keywords</label>
+                                    <input type="text" name="keywords" class="form-control" ng-model="foliodata.keywords" required>
+                                        <p ng-show="folioForm.keywords.$invalid &&  submitted"  class="help-block">*Keywords is required.</p>
+                                    </div>
+                                    <button type="submit" ng-click="$scope.selectedTab = 2;" class="btn btn-primary">Next</button>
+                                </div>
+                                <!--Basic details tab-->
+                                <!--Stocks tab-->
+                                <div class="tab-content " ng-show="$scope.selectedTab == 2">
+                                    <div id="stockselection" class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Stocks</label>
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <input type="text" class="form-control" ng-model="query">
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <button type="submit" ng-click="addSelectedStock()" class="btn btn-primary">Add</button>
+                                                    </div>
+                                                </div>
+                                                <div class="top3">
+                                                    <select ng-model="stocksMaster" size="10" ng-options="stock.stockId as stock.stockName for stock in stocks | filter:query"></select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="selectedstocks" class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Selected Stocks</label>
+                                                <div class="row">
+                                                    <table class="table table-bordered table-striped">
+                                                        <thead>
+                                                            <th>Name</th>
+                                                            <th>Symbol</th>
+                                                            <th></th>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr ng-repeat="stock in selectedStocks">
+                                                                <td>{{stock.stockName}}</td>
+                                                                <td>{{stock.stockSymbol}}</td>
+                                                                <td>
+                                                                    <button ng-click="removeStock(stock)" class="btn btn-primary btn-xs btnRemove">
+                                                                        <span class="glyphicon glyphicon-remove"></span>
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="clear row">
+                                            <button type="submit" ng-click="$scope.selectedTab = 3;" class="btn btn-primary">Next</button>
+                                        </div>
+                                    </div>
+                                    <!--Stocks tab-->
+                                    <!--Weightage tab-->
+                                    <div class="tab-content" ng-show="$scope.selectedTab == 3">
+                                        <div class="row">
+                                            <div class="col-md-9">
+                                                <div class="form-group">
+                                                    <label>Investment Amount</label>
+                                                    <input type="text" name="investmentamount" class="form-control" ng-model="foliodata.investmentamount" ng-change="recalulateAllocations()" required>
+                                                        <p ng-show="folioForm.investmentamount.$invalid && (submitted)" class="help-block">*Folio Value is required.</p>
+                                                        <label>Current Folio Value</label>
+                                                        <input type="text" name="currentFolioValue" class="form-control" ng-model="foliodata.currentFolioValue" readonly>
+                                                            <div ng-show="checkFolioValueWithinInvestmentAmount()" class="help-block">
+                                                                <span style="color:red">*Folio Value is higher than intented investment amount.</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Selected Stocks</label>
+                                                            <table class="table table-bordered table-striped">
+                                                                <thead>
+                                                                    <th>Name</th>
+                                                                    <th>Last Price</th>
+                                                                    <th>Weightage</th>
+                                                                    <th>Quantity</th>
+                                                                    <th>Sub Total</th>
+                                                                    <th>Refresh</th>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr ng-repeat="stock in selectedStocks">
+                                                                        <td>{{stock.stockName}}</td>
+                                                                        <td>{{stock.stockPrice}}</td>
+                                                                        <td>
+                                                                            <div class="col-md-6">
+                                                                                <button ng-click="reduceWeightage(stock)" class="btn btn-primary btn-xs">
+                                                                                    <span class="glyphicon glyphicon-minus"></span>
+                                                                                </button>
+                                                                                <input type="text" name="value" class="form-control" ng-model="stock.weightage" ng-change="changeWeightage(stock)" required>
+                                                                                    <button ng-click="increaseWeightage(stock)" class="btn btn-primary btn-xs">
+                                                                                        <span class="glyphicon glyphicon-plus"></span>
+                                                                                    </button>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <input type="text" name="value" class="form-control" ng-model="stock.quantity" ng-change="changeQuantity(stock)" required>
+                                                                                </td>
+                                                                                <td>{{stock.subtotal | number:2}}</td>
+                                                                                <td>
+                                                                                    <button ng-click="refreshStockPrice(stock)" class="btn btn-primary btn-xs">
+                                                                                        <span class="glyphicon glyphicon-refresh"></span>
+                                                                                    </button>
+                                                                                </td>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+										<button class="btn" ng-click="done()">Back</button>
+										<button class="btn" ng-click="followFolio()">Follow This Folio</button>
+										<div ng-show="showCreateBlogButton()"><a ui-sref="userhome.myfolios.details.newblog" class="btn btn-primary">Create Blog</a></div>
+
+                                                        </div>
+                                                        <!--Weightage tab-->
+                                                    </form>
+                                                </div>
+

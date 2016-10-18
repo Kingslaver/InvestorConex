@@ -1,0 +1,16 @@
+<div class="contentarea" id="rightColumn">
+	<div class="pageTitle">
+        <h1>Stock Upload</h1>
+    </div>
+<div class="mainWrapper">
+
+<p>This is the csv view.</p>
+
+<form method="POST" enctype="multipart/form-data"
+		action="/api/stocks/upload">
+		File to upload: <input type="file" name="file" accept=".csv"><br /> Name:
+		 <input	type="text" name="name"><br /> <br /> <input type="submit"
+			value="Upload"> Press here to upload the file!
+	</form>
+	
+	</div>

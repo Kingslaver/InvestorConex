@@ -1,0 +1,133 @@
+<h1 class="text-center">User Profile </h1>
+<br>
+<br>
+
+ <div class="contentarea" id="rightColumn">
+        <div class="pageTitle">
+            <h1>Profile Basic Details</h1>
+        </div>
+        <div class="mainWrapper">
+            <form class="col-md-12">
+				<div class="row">
+				<div class="col-md-5">					
+						<div class="form-group">
+							<label class="col-sm-3">First Name</label>
+							<div class="col-sm-9"><input type="text" class="form-control"/></div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3">Email</label>
+							<div class="col-sm-9"><input type="text" class="form-control"/></div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3">Address</label>
+							<div class="col-sm-9 addressField">
+								<input type="text" class="form-control"/>
+								<input type="text" class="form-control"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3">City</label>
+							<div class="col-sm-9"><input type="text" class="form-control"/></div>
+						</div>
+					
+				</div>
+				<div class="col-md-5">
+							<div class="form-group">
+								<label class="col-sm-3">Last Name</label>
+								<div class="col-sm-9"><input type="text" class="form-control"/></div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3" >Phone</label>
+								<div class="col-sm-9"><input type="text" class="form-control"/></div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3">State</label>
+								<div class="col-sm-9">
+									<select class="form-control"><option>--Select--</option></select>
+								</div>								
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3">Zip</label>
+								<div class="col-sm-9"><input type="text" class="form-control"/></div>
+							</div>
+						
+				</div>
+				</div>
+				
+				<div class="row">
+					<div class="button-group">
+						<button type="button" class="btn btn-save">Save</button>
+						<button type="button" class="btn btn-cancel">Canvel</button>
+					</div>
+				</div>
+			</form>
+        </div>
+        
+        
+        
+	<div class="top-buffer row">
+		<div class="col-md-4">
+		  <h2>Trading Account</h2>
+		</div>
+
+		<div ng-if="!tjAccountId && userdata.status=='New'" class="col-md-8">
+		<!-- if there is no account number for this user, give options to the user to link existing or open new -->
+			 <form name="myForm">
+			 <div  class="form-group">
+				  <label>Do you already have a TJ account?</label>
+				  <br>
+				    <input type="radio" name="HasTJAccount" ng-model="HasTJAccount" value="Yes">  Yes 
+				    <input type="radio" name="HasTJAccount" ng-model="HasTJAccount" value="No">  No 
+			  </div>
+
+
+			    <!-- if user selects that he has an existing tj account , get the account # -->
+			    <div ng-show="HasTJAccount == 'Yes'">
+				
+				<form role="form">
+					<div class="form-group">
+				  	        <label for="tjaccount">TJ Account#:</label>
+						<input type="text" class="form-control" ng-model="userdata.tjAccountId">
+						<h3><span class="label label-warning">Please ensure that the basic info mentioned above matches with your TJ account details</span></h3>
+				        </div>
+				<button type="submit" ng-click="updateUser()" class="btn btn-primary">Save</button>
+				</form>
+			    </div>
+
+
+
+			    <!-- if user selects that he does not have an existing tj account , give him option to open new one -->
+			    <div ng-show="HasTJAccount == 'No'">
+				<form role="form">
+					<label> Click the button to open a new Trading account with TJ.
+						There are several benefits to open account through us 
+					</label>
+				<button type="submit" ng-click="ConfirmNewTradingAccount()" class="btn btn-primary">Open New Account</button>
+				
+				</form>
+			    </div>
+
+			    
+			  </form>
+			
+		  </div>
+
+		<!-- if account already there, display that and show the status -->
+		<div ng-if="tjAccountId" class="col-md-8">
+			<label>Linked with traderjini account {{userdata.tjAccountId}} Status: {{userdata.status}} <label>
+		</div>
+
+		<!-- if account not there and new trader account has been requested display that and show the status -->
+		<div ng-if="!tjAccountId && userdata.status!='New' && userdata.status!='Trader'" class="col-md-8">
+			<label>New Traderjini account request under process. {{userdata.tjAccountId}} </label>
+			<label>Status: {{userdata.status}} <label>
+		</div>
+
+	
+
+  
+</div>
+
+
+
+

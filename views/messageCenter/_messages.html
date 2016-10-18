@@ -1,0 +1,35 @@
+﻿<div class="tabs-below">
+    <table class="table table-bordered table-striped">
+		<thead>
+		<tr>
+		<th>Select</th>
+		<th>Sender</th>
+		<th>Subject</th>
+		<th>Date</th>
+		<th>Delete</th>
+		</tr>
+		</thead>
+		
+		<tbody>
+		
+        <tr ng-repeat="message in messages">
+            <td>
+                <input type="checkbox" ng-bind="message.messageId" />
+            </td>
+            <td>{{message.fromUser.userName}}</td>
+            <td>
+                <a ng-href="#/messageCenter/detailedMessage/{{message.messageId}}">  {{message.subject}}</a>
+            </td>
+            <td>
+                <a ng-href="#/messageCenter/detailedMessage/{{message.messageId}}"> {{message.Date | date:'yyyy-MM-dd HH:mm:ss'}}</a>
+            </td>
+            <td>
+                <button ng-click="deleteMessage(message)">Delete</button>
+            </td>
+        </tr>
+        </tbody>
+
+
+    </table>
+
+</div>

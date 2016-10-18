@@ -1,0 +1,55 @@
+ <div  ng-controller="LoginCtrl">
+<div class="login">
+<div class="loginContainer">
+<div class="loginLogoBg"><img src="content/images/img_logo.jpg" /></div>
+<h1>Login</h1> <h5>For demo, login as demouser/demo123</h5>
+<div class="loginCaptcha" vc-recaptcha key="'6LcRkw4TAAAAAFjmuQPjU-RfTH1tYy5PUqUbTcKf'" on-success="setResponse(response)"></div>
+<div class="row">
+	<form name="loginForm">
+	<p>Username:</p>
+	<input type="text" ng-model="userdata.userName" class="form-control"/>
+	<p>Password:</p>
+	<input type="password" ng-model="userdata.password" class="form-control"/>
+	<input type="submit" ng-click="customLogin()" class="btn btn-primary" value="Login"/>
+	<p><span style="color: red">{{errorMessage}}</span></p>
+	<a href="#" class="pull-right">Forgot password?</a>
+	</form>
+</div>
+<div class="row">
+<div class="loginSeparator"><span></span><b>or</b></div>
+<a href="#" ng-click="login()"  class="btn btn-primary gmail">Login with Gmail</a>
+<a href="#" class="btn btn-primary yahoo">Login with Yahoo</a>
+
+</div>
+</div>
+</div>
+</div>
+
+<script>
+$(function(){
+	/*if($('body').find('.loginContainer').length > 0){		
+		$('body').addClass('loginPage');
+	}*/
+	
+	if($('.loginContainer').is(':visible')){		
+		$('body').addClass('loginPage');
+	}
+	if($('#leftColumn').is(':visible')){		
+		$('body').removeClass('loginPage');
+	}
+	
+
+	 function centerContent()
+	{
+		var container = $('body');
+		var content = $('.login');
+		//content.css("left", (container.width()-content.width())/2);
+		content.css("top", (container.height()-content.height())/2);
+	}
+	centerContent();
+	$(window).resize(function()
+	{
+		centerContent();
+	});
+});
+</script>

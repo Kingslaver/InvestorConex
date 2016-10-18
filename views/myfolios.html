@@ -1,0 +1,43 @@
+<div class="wrapper">
+
+ <div class="contentarea" id="rightColumn">
+        <div class="pageTitle">
+            <h1>My Folio</h1>
+        </div>
+        
+<div class="mainWrapper">
+	
+	 <div class="folioAccordion" ng-controller="folioAccordion">
+                <div class="folioAccordionTitle" ng-click="clicked($event)">
+                    <b>Created my Me (Using Real Money)</b>
+                    <i class="fa fa-angle-down"></i>
+                </div> 
+                
+                <div class="folioAccordionContent">
+					<div>
+						<ul class="myFolioList">
+						<li ng-repeat="folio in myfolios">
+							<a ng-href="#/userhome/myfolios/{{folio.folioId}}"><div class="folioImageMask"><img width="100" height="100" ng-src={{folio.image}}></div></a>
+							<div class="folioDetails">
+								<div class="pull-left">
+									<a ng-href="#/userhome/myfolios/{{folio.folioId}}"><h3 class="folioTitle">{{folio.name}}</h3></a>
+									<h1 class="folioPercentage"><i class="fa fa-arrow-up"></i>40%</h1>
+								</div>
+								
+							</div>
+						</li>
+						</ul>
+					</div>
+				</div>  
+				
+				
+				
+</div>
+</div>        
+
+</div>       
+</div>
+
+				
+
+		

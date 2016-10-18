@@ -1,0 +1,77 @@
+<div class="contentarea" id="rightColumn">
+	<div class="pageTitle">
+        <h1>Trade Placement</h1>
+    </div>
+<div class="mainWrapper createFolio">
+
+	<form name="tradeForm" role="form" novalidate class="col-md-12">
+
+    <div class="row">
+        <div id="stockselection" class="col-md-6">
+            <div class="form-group">
+                <label>Stocks</label>
+                <div class="row">
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" ng-model="query">
+                    </div>
+                    <div class="col-md-3">
+                        <button type="submit" ng-click="addSelectedStock()" class="btn btn-primary">Add</button>
+                    </div>
+                </div>
+                <div class="top3">
+                    <select ng-model="stocksMaster" size="10" ng-options="stock.stockId as stock.stockName for stock in stocks | filter:query"></select>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-6">
+
+            <div class="form-group">
+                <label>Value</label>
+                <input type="text" name="currentFolioValue" class="form-control" ng-model="foliodata.cost" ng-disabled="mode=='Detail'" readonly>
+                <div ng-show="foliodata.cost >foliodata.investmentAmount" class="help-block">
+                    <span style="color:red">*Folio Value is higher than intented investment amount.</span>
+
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label>Selected Stocks</label>
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <th>Name</th>
+                        <th>Entry Price</th>
+                        <th>Current Price</th>
+                        <th ng-show="mode=='Detail'">Profit</th>
+                        <th ng-show="mode=='Detail'">Profit Pct</th>
+                        <th>Quantity</th>
+                        <th>Sub Total</th>
+                        <th>Refresh</th>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="folioStock in foliodata.folioStocks">
+                            <td>{{folioStock.stock.stockName}}</td>
+                            <td>{{folioStock.entryPrice}}</td>
+                            <td>{{folioStock.marketPrice}}</td>
+                            <td>
+                            <input type="text" name="value" class="form-control" ng-model="folioStock.quantity" ng-change="changeQuantity(folioStock)">
+                            </td>
+                            <td ng-show="mode=='Detail'">{{folioStock.profit | number:2}}</td>
+                            <td ng-show="mode=='Detail'">{{folioStock.profitPct | number:2}}</td>
+                            <td>{{folioStock.subtotal | number:2}}</td>
+                            <td>
+                                <button ng-click="refreshStockPrice(folioStock)" class="btn btn-primary btn-xs">
+                                    <span class="glyphicon glyphicon-refresh"></span>
+                                </button>
+                            </td>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <button type="submit" ng-hide="mode=='Detail'" ng-click="addTrades(tradeForm.$valid)" class="btn btn-primary">Save</button>
+
+    </div>
+</form>
+</div>
+</div>
